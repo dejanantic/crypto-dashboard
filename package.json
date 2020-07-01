@@ -1,0 +1,20 @@
+{
+  "name": "crypto_dashboard",
+  "version": "1.0.0",
+  "description": "A nifty little dashboard to give you a quick glance over your crypto portfolio.",
+  "main": "index.js",
+  "scripts": {
+    "sass-watch": "sass --watch scss/main.scss css/main.css"
+  },
+  "keywords": [],
+  "author": "Dejan Antic",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "sass": "^1.26.9"
+  }
+}
