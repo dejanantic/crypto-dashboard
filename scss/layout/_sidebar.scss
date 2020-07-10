@@ -1,0 +1,41 @@
+@import "../bootstrap/custom-variables";
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 11rem;
+  height: 100vh;
+  padding: 5.5rem 0.5rem 2rem;
+
+  //   Sidebar button
+  &-toggle {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    font-size: 2.5rem;
+    color: map-get($theme-colors, "secondary");
+  }
+
+  .nav-link {
+    //   Secondary color for testing purposes
+    color: map-get($theme-colors, "primary");
+    opacity: 0.5;
+    transition: all 0.2s ease;
+
+    &.active {
+      opacity: 1;
+      color: map-get($colors, "white");
+      background-color: map-get($theme-colors, "primary");
+    }
+
+    &:hover {
+      background-color: map-get($theme-colors, "primary");
+      color: map-get($colors, "white");
+    }
+
+    i {
+      margin-right: 1rem;
+    }
+  }
+}
