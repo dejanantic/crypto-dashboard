@@ -15969,7 +15969,7 @@ readers do not read off random characters that represent icons */
 .app-main {
   padding-left: 11rem;
 }
-.app-main .dashboard {
+.app-main .main-content {
   padding: 3rem;
 }
 
