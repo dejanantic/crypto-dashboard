@@ -7,7 +7,13 @@
   width: 11rem;
   height: 100vh;
   padding: 5.5rem 0.5rem 2rem;
-
+  // bootstrap mixin use example
+  // @include media-breakpoint-down(lg) {
+  //   background-color: hotpink;
+  // }
+  // @include media-breakpoint-down(md) {
+  //   background-color: salmon;
+  // }
   //   Sidebar button
   &-toggle {
     position: absolute;

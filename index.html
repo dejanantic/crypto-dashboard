@@ -2,99 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Dashboard -- All Your Cryptos In One Place</title>
-    <link rel="stylesheet" href="./css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Crypto Dashboard -- All Your Cryptos In One Place</title>
+  <link rel="stylesheet"
+        href="./css/main.css">
 </head>
 
 <body>
-    <div class="app-container">
-        <aside class="sidebar border-right">
-            <button class="sidebar-toggle btn"><i class="fas fa-angle-double-left"></i></button>
-            <ul class="nav h-100 flex-column">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active">
-                        <i class="fas fa-chart-bar"></i>Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="transactions.html" class="nav-link">
-                        <i class="fas fa-exchange-alt"></i>Transactions
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="account.html" class="nav-link">
-                        <i class="fas fa-user"></i>Account
-                    </a>
-                </li>
-                <li class="nav-item mt-auto">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-sign-out-alt"></i>Log out
-                    </a>
-                </li>
-            </ul>
-        </aside>
-        <main class="app-main">
-            <header class="sticky-top border-bottom justify-content-between bg-white align-items-center px-5 py-3 d-flex">
-                <div id="logo" class="logo h1">Crypto Tracker</div>
-                <form class="form-inline w-50">
-                    <input class="form-control mr-sm-2 flex-grow-1" type="search" placeholder="Search coins" aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-                </form>
-                <button id="add" class="add-coin btn btn-primary">Add coin</button>
-            </header>
-            <article class="main-content">
-                <div class="row mb-4">
-                    <div class="col-sm-12 col-md-7 mb-4 mb-md-0">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Maybe a table for coins, which I have to fetch from CoinGecko API -->
-                <table id="crypto-table" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Coin</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Holdings</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </article>
-        </main>
-    </div>
-    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="app.js"></script>
+  <div class="app-container">
+    <aside class="sidebar border-right">
+      <button class="sidebar-toggle btn"><i class="fas fa-angle-double-left"></i></button>
+      <ul class="nav h-100 flex-column">
+        <li class="nav-item">
+          <a href="index.html"
+             class="nav-link active">
+            <i class="fas fa-chart-bar"></i>Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="transactions.html"
+             class="nav-link">
+            <i class="fas fa-exchange-alt"></i>Transactions
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="account.html"
+             class="nav-link">
+            <i class="fas fa-user"></i>Account
+          </a>
+        </li>
+        <li class="nav-item mt-auto">
+          <a href="#"
+             class="nav-link">
+            <i class="fas fa-sign-out-alt"></i>Log out
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <main class="app-main">
+      <header class="sticky-top border-bottom justify-content-between bg-white align-items-center px-5 py-3 d-flex">
+        <div id="logo"
+             class="logo h1">Crypto Tracker</div>
+        <form class="form-inline w-50">
+          <input class="form-control mr-sm-2 flex-grow-1"
+                 type="search"
+                 placeholder="Search coins"
+                 aria-label="Search">
+          <button class="btn btn-outline-primary my-2 my-sm-0"
+                  type="submit">Search</button>
+        </form>
+        <button id="add"
+                class="add-coin btn btn-primary">Add coin</button>
+      </header>
+      <article class="main-content">
+        <div class="row mb-4">
+          <div class="col-sm-12 col-md-7 mb-4 mb-md-0">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-5">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Maybe a table for coins, which I have to fetch from CoinGecko API -->
+        <table id="crypto-table"
+               class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Coin</th>
+              <th scope="col">Price</th>
+              <th scope="col">Holdings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                 href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link"
+                 href="#">1</a></li>
+            <li class="page-item"><a class="page-link"
+                 href="#">2</a></li>
+            <li class="page-item"><a class="page-link"
+                 href="#">3</a></li>
+            <li class="page-item"><a class="page-link"
+                 href="#">Next</a></li>
+          </ul>
+        </nav>
+      </article>
+    </main>
+  </div>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>

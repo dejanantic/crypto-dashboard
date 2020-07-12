@@ -15981,6 +15981,9 @@ readers do not read off random characters that represent icons */
   height: 100vh;
   padding: 5.5rem 0.5rem 2rem;
 }
+.sidebar:hover {
+  background-color: salmon;
+}
 .sidebar-toggle {
   position: absolute;
   right: 0;
