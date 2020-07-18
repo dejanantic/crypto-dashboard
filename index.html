@@ -44,25 +44,74 @@
         </form>
       </header>
       <article class="main-content">
-        <div class="row mb-4">
-          <div class="col-sm-12 col-md-7 mb-4 mb-md-0">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <div class="coin-details" id="coin-details">
+
+          <!-- Simple Bootstrap -->
+          <div class="row mb-4">
+            <div class="col-sm-6 col-md-3">
+              <div class="coin-card mb-3 d-flex">
+                <img src="" alt="Coin image" class="coin-image" id="coin-image">
+                <div class="coin-id ml-3">
+                  <h5 class="coin-name card-title" id="coin-name">Coin name</h5>
+                  <h6 class="coin-symbol card-subtitle text-muted" id="coin-symbol">Coin symbol</h6>
+                </div>
+              </div>
+              <p class="current-price display-4" id="coin-price">4154.20</p>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="coin-extras">
+                <div class="market-cap d-flex border-bottom mb-2">
+                  <p class="font-weight-bold d-inline-block mr-auto">Market cap</p>
+                  <p id="market-cap">2500000</p>
+                </div>
+                <div class="market-cap d-flex border-bottom mb-3">
+                  <p class="font-weight-bold d-inline-block mr-auto">24h Volume</p>
+                  <p id="volume">2500000</p>
+                </div>
+                <div class="market-cap d-flex">
+                  <p class="font-weight-bold d-inline-block mr-auto">24h Low/High</p>
+                  <p id="low-high">2500000</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-12 col-md-5">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              </div>
+            <div class="col-sm-12 col-md-6">
+              <div class="coin-chart" id="coin-chart">Chart goes here</div>
             </div>
           </div>
+
+          <!-- BEM notation -->
+          <!-- <div class="row mb-4">
+            <div class="coin-details__coin-data col-md-5 col-sm-12">
+              <div class="coin-details__card">
+                <div class="coin-details__image"><img src="" alt="Crypto image"></div>
+                <div class="coin-details__id">
+                  <h5 class="coin-details__name">Coin name</h5>
+                  <h6 class="coin-details__symbol">SMB</h6>
+                </div>
+              </div>
+              <p class="coin-details__current-price">9999</p>
+            </div>
+            <div class="coin-details__coin-chart col-md-7 col-sm-12"></div>
+          </div> -->
+
+          <!-- <div class="row mb-4">
+            <div class="col-sm-12 mb-4 mb-md-0">
+              <div class="card">
+                <div class="card-body">
+                  <div class="coin-header d-flex">
+                    <div class="coin-image"><img id="coin-image" alt="Crypto image"></div>
+                    <div class="coin-titles ml-2">
+                      <h5 class="card-title" id="crypto-name">Cryptocurrency Details</h5>
+                      <p class="card-subtitle text-muted" id="crypto-symbol">Symbol</p>
+                    </div>
+
+                  </div>
+                  <p class="card-text" id="crypto-description">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </div>
+          </div> -->
         </div>
-        <!-- Maybe a table for coins, which I have to fetch from CoinGecko API -->
         <table id="crypto-table" class="table table-hover">
           <thead>
             <tr>

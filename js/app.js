@@ -22,6 +22,22 @@ $(document).ready(function () {
     return $span;
   }
 
+  function formatCoinPrice(price, locale = 'en-US', currency = 'USD') {
+    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(price);
+  }
+
+  function formatNumber(number, locale = 'en-US') {
+    return new Intl.NumberFormat(locale).format(number);
+  }
+
+  function saveCoinData(coinData) {
+    localStorage.setItem('coinData', JSON.stringify(coinData));
+  }
+
+  function getCoinData() {
+    return JSON.parse(localStorage.getItem('coinData'))
+  }
+
   function displayCoins(data) {
     const $table = $('#crypto-table tbody');
 
@@ -42,7 +58,8 @@ $(document).ready(function () {
 
           case 'price':
             const coinPrice = coin.current_price;
-            const formattedValue = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coinPrice);
+            const formattedValue = formatCoinPrice(coinPrice);
+            // const formattedValue = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coinPrice);
             $($td).text(formattedValue);
             $($td).addClass('text-right')
             $($row).append($td);
@@ -74,41 +91,44 @@ $(document).ready(function () {
       // ids: 'bitcoin,ethereum,litecoin,cardano',
       price_change_percentage: '24h'
     }
-  }).done(displayCoins);
+  }).done([saveCoinData, displayCoins]);
 
   $('#account-form').submit(function (e) {
     e.preventDefault();
   })
 
+  // Show coin details
+  $('#crypto-table').click(function (e) {
+    const $parentTr = $(e.target).closest('tr');
+    if (!$($parentTr).attr('data-coin-id')) return;
 
-  // Solution down here
+    const id = $parentTr.attr('data-coin-id');
 
+    // toggle the #coin-details section here
+    const $coinDetailsSection = $('#coin-details');
 
+    $.ajax({
+      url: `https://api.coingecko.com/api/v3/coins/${id}`,
+      data: {
+        tickers: false,
+        community_data: false,
+        developer_data: false,
+        sparkline: true,
+        localization: false
+      }
+    }).done(displayCoinDetails)
+  });
 
-
-
-
-
-
-
-
-
-
-
-
-  // Populate the table with custom data from my object
-
-
-  // const holdingProperties = Object.keys(holdings[0]);
-
-  // const $cryptoTableBody = $('#crypto-table tbody');
-  // holdings.forEach((item, index) => {
-  //   const $row = $('<tr></tr>').attr('data-coin-id', index);
-  //   holdingProperties.forEach(key => {
-  //     $row.append(`<td>${item[key]}</td>`);
-  //   });
-  //   $cryptoTableBody.append($row);
-  // });
-
-  // TODO: implement show crypto details on click
+  function displayCoinDetails(coinData) {
+    $('#coin-name').text(coinData.name);
+    $('#coin-symbol').text(coinData.symbol.toUpperCase());
+    $('#coin-image').attr({
+      src: coinData.image.small,
+      alt: `${coinData.name} image`
+    });
+    $('#coin-price').text(formatCoinPrice(coinData.market_data.current_price.usd));
+    $('#market-cap').text(formatCoinPrice(coinData.market_data.market_cap.usd));
+    $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
+    $('#low-high').text(`${formatCoinPrice(coinData.market_data.low_24h.usd)} / ${formatCoinPrice(coinData.market_data.high_24h.usd)}`);
+  }
 });
