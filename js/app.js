@@ -59,7 +59,6 @@ $(document).ready(function () {
           case 'price':
             const coinPrice = coin.current_price;
             const formattedValue = formatCoinPrice(coinPrice);
-            // const formattedValue = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(coinPrice);
             $($td).text(formattedValue);
             $($td).addClass('text-right')
             $($row).append($td);
@@ -80,6 +79,7 @@ $(document).ready(function () {
     })
   }
 
+  // Get all coins
   $.ajax({
     url: 'https://api.coingecko.com/api/v3/coins/markets',
     data: {
@@ -104,8 +104,11 @@ $(document).ready(function () {
 
     const id = $parentTr.attr('data-coin-id');
 
-    // toggle the #coin-details section here
-    const $coinDetailsSection = $('#coin-details');
+    // Show coin details section here
+    showCoinDetailsSection();
+
+    // Scroll to top
+    // $(window).scrollTop(0);
 
     $.ajax({
       url: `https://api.coingecko.com/api/v3/coins/${id}`,
@@ -119,6 +122,22 @@ $(document).ready(function () {
     }).done(displayCoinDetails)
   });
 
+  function showCoinDetailsSection() {
+    const $coinDetailsSection = $('#coin-details');
+
+    if ($($coinDetailsSection).attr('data-status') === 'hidden') {
+      $($coinDetailsSection).slideDown();
+      $($coinDetailsSection).attr('data-status', 'open');
+    };
+  }
+
+  function hideCoinDetailsSection() {
+    const $coinDetailsSection = $('#coin-details');
+
+    $($coinDetailsSection).attr('data-status', 'hidden');
+    $($coinDetailsSection).slideToggle();
+  }
+
   function displayCoinDetails(coinData) {
     $('#coin-name').text(coinData.name);
     $('#coin-symbol').text(coinData.symbol.toUpperCase());
@@ -131,4 +150,9 @@ $(document).ready(function () {
     $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
     $('#low-high').text(`${formatCoinPrice(coinData.market_data.low_24h.usd)} / ${formatCoinPrice(coinData.market_data.high_24h.usd)}`);
   }
+
+  $('#close-details-section').click(function sayHello() {
+    hideCoinDetailsSection();
+  })
+
 });

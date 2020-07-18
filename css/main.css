@@ -16006,8 +16006,8 @@ readers do not read off random characters that represent icons */
   margin-right: 1rem;
 }
 
-.coin-details__card {
-  display: flex;
+.coin-details {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

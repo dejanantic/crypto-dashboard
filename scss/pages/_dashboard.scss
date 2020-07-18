@@ -1,8 +1,10 @@
 @import "../bootstrap/custom-variables";
 
 .coin-details {
+  display: none;
+  background-color: map-get($theme-colors, "white");
+
   &__card {
-    display: flex;
   }
 
   &__current-price {

@@ -44,33 +44,35 @@
         </form>
       </header>
       <article class="main-content">
-        <div class="coin-details" id="coin-details">
-
+        <div class="coin-details" id="coin-details" data-status="hidden">
+          <button type="button" id="close-details-section" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
           <!-- Simple Bootstrap -->
           <div class="row mb-4">
             <div class="col-sm-6 col-md-3">
               <div class="coin-card mb-3 d-flex">
                 <img src="" alt="Coin image" class="coin-image" id="coin-image">
                 <div class="coin-id ml-3">
-                  <h5 class="coin-name card-title" id="coin-name">Coin name</h5>
-                  <h6 class="coin-symbol card-subtitle text-muted" id="coin-symbol">Coin symbol</h6>
+                  <h5 class="coin-name card-title" id="coin-name"></h5>
+                  <h6 class="coin-symbol card-subtitle text-muted" id="coin-symbol"></h6>
                 </div>
               </div>
-              <p class="current-price display-4" id="coin-price">4154.20</p>
+              <p class="current-price display-4" id="coin-price"></p>
             </div>
             <div class="col-sm-6 col-md-3">
               <div class="coin-extras">
                 <div class="market-cap d-flex border-bottom mb-2">
                   <p class="font-weight-bold d-inline-block mr-auto">Market cap</p>
-                  <p id="market-cap">2500000</p>
+                  <p id="market-cap"></p>
                 </div>
                 <div class="market-cap d-flex border-bottom mb-3">
                   <p class="font-weight-bold d-inline-block mr-auto">24h Volume</p>
-                  <p id="volume">2500000</p>
+                  <p id="volume"></p>
                 </div>
                 <div class="market-cap d-flex">
                   <p class="font-weight-bold d-inline-block mr-auto">24h Low/High</p>
-                  <p id="low-high">2500000</p>
+                  <p id="low-high"></p>
                 </div>
               </div>
             </div>
