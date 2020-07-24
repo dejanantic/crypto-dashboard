@@ -16009,5 +16009,8 @@ readers do not read off random characters that represent icons */
 .coin-details {
   display: none;
 }
+#crypto-table tbody tr {
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=main.css.map */

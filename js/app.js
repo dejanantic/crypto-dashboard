@@ -79,19 +79,23 @@ $(document).ready(function () {
     })
   }
 
-  // Get all coins
-  $.ajax({
-    url: 'https://api.coingecko.com/api/v3/coins/markets',
-    data: {
-      vs_currency: 'usd',
-      order: 'market_cap_desc',
-      per_page: 50,
-      page: 1,
-      sparkline: true,
-      // ids: 'bitcoin,ethereum,litecoin,cardano',
-      price_change_percentage: '24h'
-    }
-  }).done([saveCoinData, displayCoins]);
+  // Fetch coins -- use it for pagination
+  function fetchCoins(pageNumber = 1) {
+    $.ajax({
+      url: 'https://api.coingecko.com/api/v3/coins/markets',
+      data: {
+        vs_currency: 'usd',
+        order: 'market_cap_desc',
+        per_page: 50,
+        page: pageNumber,
+        sparkline: true,
+        // ids: 'bitcoin,ethereum,litecoin,cardano',
+        price_change_percentage: '24h'
+      }
+    }).done(displayCoins);
+  }
+
+  fetchCoins();
 
   $('#account-form').submit(function (e) {
     e.preventDefault();
@@ -151,8 +155,114 @@ $(document).ready(function () {
     $('#low-high').text(`${formatCoinPrice(coinData.market_data.low_24h.usd)} / ${formatCoinPrice(coinData.market_data.high_24h.usd)}`);
   }
 
-  $('#close-details-section').click(function sayHello() {
+  $('#close-details-section').click(function () {
     hideCoinDetailsSection();
   })
 
+  function clearTableBody() {
+    const $cryptoTableBody = $('tbody');
+    $($cryptoTableBody).empty()
+  }
+
+  // Pagination functionality
+  $('#pagination').click(function changeCoinPage(e) {
+
+    const $clickedLi = $(e.target).closest('li');
+    const $cryptoTable = $('#crypto-table');
+    const $liPrevious = $('li[data-page=previous]');
+    const currentPage = $('#crypto-table').attr('data-page');
+    const targetPage = $clickedLi.attr('data-page');
+    const $ellipsisLi = $(`
+      <li class="page-item disabled" id="ellipsis">
+        <span class="page-link">&mldr;</span>
+      </li>`
+    );
+
+    // Return if clicking on the ul#pagination area
+    if (e.target === e.currentTarget) return;
+
+    // Return if clicking on a disabled LI or if clicking on the same page as the 
+    // current page
+    if ($clickedLi.hasClass('disabled') || currentPage == targetPage) {
+
+      // Prevent anchor element's default behavior (scolling to the top)
+      e.preventDefault();
+      return;
+    };
+
+    // Check if click happened on previous/next buttons
+    if (isNaN(targetPage)) {
+      if (targetPage === 'next') {
+        const newPage = +currentPage + 1;
+        clearTableBody();
+        fetchCoins(newPage);
+
+        // Set the new page on #crypto-table data-page attribute
+        $cryptoTable.attr('data-page', newPage);
+      } else {
+        const newPage = +currentPage - 1;
+        clearTableBody();
+        fetchCoins(newPage);
+
+        // Set the new page on #crypto-table data-page attribute
+        $cryptoTable.attr('data-page', newPage);
+      }
+    } else {
+      clearTableBody();
+      fetchCoins(targetPage);
+
+      // Set the new page on #crypto-table data-page attribute
+      $cryptoTable.attr('data-page', targetPage);
+    }
+
+    // Remove .disabled class on LI "previous" if page is not 1
+    $cryptoTable.attr('data-page') != 1 ? $liPrevious.removeClass('disabled') : $liPrevious.addClass('disabled');
+
+    // If page is greater than 3, add LI "ellipsis" and update the LI numbers accordingly
+    // Else, remove the LI "ellipsis" and update the LI numbers accordingly
+    if ($cryptoTable.attr('data-page') > 3) {
+
+      // If LI "ellipsis" doesn't exist in pagination, add one
+      if ($('#ellipsis').length === 0) $('li[data-page=1]').after($ellipsisLi);
+
+      // update li numbers
+      let liPageNumberStart = $('#crypto-table').attr('data-page') - 1;
+
+      // Get the last two numbered LIs
+      $('li.page-item').slice(-3, -1).each(function updateLiNumbers() {
+
+        // Convert the element into a jQuery object
+        const $this = $(this);
+
+        // Update the data-page attribute
+        $this.attr('data-page', liPageNumberStart);
+
+        // Update the anchor text and increase liPageNumberStart
+        $this.children().text(liPageNumberStart++);
+      })
+    } else {
+      // Remove LI "ellipsis" if it exists
+      if ($('#ellipsis').length !== 0) $('#ellipsis').remove();
+
+      // If #crypto-table data-page <= 3, we just need pages 1, 2 and 3
+      let liPageNumberStart = 2;
+
+      $('li.page-item').slice(-3, -1).each(function updateLiNumbers() {
+
+        // Convert the element into a jQuery object
+        const $this = $(this);
+
+        // Update the data-page attribute
+        $this.attr('data-page', liPageNumberStart);
+
+        // Update the anchor text
+        $this.children().text(liPageNumberStart++);
+      })
+
+    }
+
+    // Update the new active LI with the .active
+    $('li.active').removeClass('active');
+    $(`li[data-page=${$cryptoTable.attr('data-page')}]`).addClass('active');
+  })
 });

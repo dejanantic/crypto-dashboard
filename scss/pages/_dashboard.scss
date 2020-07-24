@@ -10,3 +10,9 @@
   &__current-price {
   }
 }
+
+#crypto-table {
+  tbody tr {
+    cursor: pointer;
+  }
+}
