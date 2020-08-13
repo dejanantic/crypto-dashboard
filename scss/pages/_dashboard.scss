@@ -3,16 +3,19 @@
 .coin-details {
   display: none;
   background-color: map-get($theme-colors, "white");
+}
 
-  &__card {
-  }
-
-  &__current-price {
-  }
+.table-container {
+  width: 100%;
+  overflow-x: auto;
 }
 
 #crypto-table {
   tbody tr {
     cursor: pointer;
+  }
+
+  tr td:first-child {
+    white-space: nowrap;
   }
 }

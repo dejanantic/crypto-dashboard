@@ -1,23 +1,26 @@
 $(document).ready(function () {
 
+  // Update sidebarState
+  updateSidebarState();
+
   function getCoinThumbnail(coin) {
     const $span = $('<span></span>');
-    $($span).addClass('coin-image mr-2');
+    $span.addClass('coin-image mr-2');
     const $img = $('<img>');
-    $($img).attr({
+    $img.attr({
       alt: `${coin.name} (${coin.symbol.toUpperCase()})`,
       src: `${coin.image}`,
       height: '25px'
     });
-    $($span).append($img);
+    $span.append($img);
 
     return $span;
   }
 
   function getCoinSymbol(coin) {
     const $span = $('<span></span>');
-    $($span).addClass('coin-symbol text-dark font-weight-light ml-5');
-    $($span).text(`${coin.symbol.toUpperCase()}`);
+    $span.addClass('coin-symbol text-dark font-weight-light ml-5');
+    $span.text(`${coin.symbol.toUpperCase()}`);
 
     return $span;
   }
@@ -104,7 +107,7 @@ $(document).ready(function () {
   // Show coin details
   $('#crypto-table').click(function (e) {
     const $parentTr = $(e.target).closest('tr');
-    if (!$($parentTr).attr('data-coin-id')) return;
+    if (!$parentTr.attr('data-coin-id')) return;
 
     const id = $parentTr.attr('data-coin-id');
 
@@ -129,17 +132,17 @@ $(document).ready(function () {
   function showCoinDetailsSection() {
     const $coinDetailsSection = $('#coin-details');
 
-    if ($($coinDetailsSection).attr('data-status') === 'hidden') {
-      $($coinDetailsSection).slideDown();
-      $($coinDetailsSection).attr('data-status', 'open');
+    if ($coinDetailsSection.attr('data-status') === 'hidden') {
+      $coinDetailsSection.slideDown();
+      $coinDetailsSection.attr('data-status', 'open');
     };
   }
 
   function hideCoinDetailsSection() {
     const $coinDetailsSection = $('#coin-details');
 
-    $($coinDetailsSection).attr('data-status', 'hidden');
-    $($coinDetailsSection).slideToggle();
+    $coinDetailsSection.attr('data-status', 'hidden');
+    $coinDetailsSection.slideToggle();
   }
 
   function displayCoinDetails(coinData) {
@@ -161,7 +164,7 @@ $(document).ready(function () {
 
   function clearTableBody() {
     const $cryptoTableBody = $('tbody');
-    $($cryptoTableBody).empty()
+    $cryptoTableBody.empty()
   }
 
   // Pagination functionality
@@ -265,4 +268,24 @@ $(document).ready(function () {
     $('li.active').removeClass('active');
     $(`li[data-page=${$cryptoTable.attr('data-page')}]`).addClass('active');
   })
+
+  // Toggle sidebar
+  $('.sidebar-toggle').click(function toggleSidebar() {
+    const $sidebar = $('.sidebar');
+
+    if ($sidebar.hasClass('collapsed')) {
+      $sidebar.removeClass('collapsed');
+      localStorage.setItem('sidebarState', 'open');
+    } else {
+      $sidebar.addClass('collapsed');
+      localStorage.setItem('sidebarState', 'closed');
+    }
+  })
+
+  // Save sidebar state (open/close) to local storage
+  function updateSidebarState() {
+    const sidebarState = localStorage.getItem('sidebarState') ? localStorage.getItem('sidebarState') : 'open';
+    if (sidebarState === 'open') $('.sidebar').removeClass('collapsed');
+    else $('.sidebar').addClass('collapsed');
+  }
 });

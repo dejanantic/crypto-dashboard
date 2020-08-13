@@ -10,27 +10,27 @@
 
 <body>
   <div class="app-container">
-    <aside class="sidebar border-right">
-      <button class="sidebar-toggle btn"><i class="fas fa-angle-double-left"></i></button>
+    <aside class="sidebar border-right" id="sidebar">
+      <button class="sidebar-toggle btn" id="sidebar-toggle"><i class="fas fa-angle-double-left"></i></button>
       <ul class="nav h-100 flex-column">
         <li class="nav-item">
           <a href="index.html" class="nav-link active">
-            <i class="fas fa-chart-bar"></i>Dashboard
+            <i class="fas fa-chart-bar"></i><span class="link-text">Dashboard</span>
           </a>
         </li>
         <li class="nav-item">
           <a href="transactions.html" class="nav-link">
-            <i class="fas fa-exchange-alt"></i>Transactions
+            <i class="fas fa-exchange-alt"></i><span class="link-text">Transactions</span>
           </a>
         </li>
         <li class="nav-item">
           <a href="account.html" class="nav-link">
-            <i class="fas fa-user"></i>Account
+            <i class="fas fa-user"></i><span class="link-text">Account</span>
           </a>
         </li>
         <li class="nav-item mt-auto">
           <a href="#" class="nav-link">
-            <i class="fas fa-sign-out-alt"></i>Log out
+            <i class="fas fa-sign-out-alt"></i><span class="link-text">Log out</span>
           </a>
         </li>
       </ul>
@@ -81,19 +81,21 @@
             </div>
           </div>
         </div>
-        <table id="crypto-table" class="table table-hover" data-page="1">
-          <thead>
-            <tr>
-              <th class="text-left" scope="col">Coin</th>
-              <th class="text-right" scope="col">Price</th>
-              <th class="text-right" scope="col">24 Hours</th>
-              <!-- <th scope="col">Last 7 Days</th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Coins go here -->
-          </tbody>
-        </table>
+        <div class="table-container">
+          <table id="crypto-table" class="table table-hover" data-page="1">
+            <thead>
+              <tr>
+                <th class="text-left" scope="col">Coin</th>
+                <th class="text-right" scope="col">Price</th>
+                <th class="text-right" scope="col">24 Hours</th>
+                <!-- <th scope="col">Last 7 Days</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Coins go here -->
+            </tbody>
+          </table>
+        </div>
         <nav aria-label="Coin page navigation">
           <ul class="pagination justify-content-center" id="pagination">
             <li class="page-item disabled" data-page="previous"><a class="page-link" href="#">Previous</a></li>
