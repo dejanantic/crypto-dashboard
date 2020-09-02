@@ -17,14 +17,6 @@ $(document).ready(function () {
     return $span;
   }
 
-  function getCoinSymbol(coin) {
-    const $span = $('<span></span>');
-    $span.addClass('coin-symbol text-dark font-weight-light ml-5');
-    $span.text(`${coin.symbol.toUpperCase()}`);
-
-    return $span;
-  }
-
   function formatCoinPrice(price, locale = 'en-US', currency = 'USD') {
     return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(price);
   }
@@ -52,28 +44,28 @@ $(document).ready(function () {
 
         switch ($(th).text().toLowerCase()) {
           case 'coin':
-            $($td).text(coin.name);
-            $($td).addClass('font-weight-bold text-primary');
-            $($td).prepend(getCoinThumbnail(coin));
-            $($td).append(getCoinSymbol(coin));
-            $($row).append($td);
+            $td.text(coin.symbol.toUpperCase());
+            $td.addClass('font-weight-bold text-primary');
+            $td.prepend(getCoinThumbnail(coin));
+            // $td.append(getCoinSymbol(coin));
+            $row.append($td);
             break;
 
           case 'price':
             const coinPrice = coin.current_price;
             const formattedValue = formatCoinPrice(coinPrice);
-            $($td).text(formattedValue);
-            $($td).addClass('text-right')
-            $($row).append($td);
+            $td.text(formattedValue);
+            $td.addClass('text-right')
+            $row.append($td);
             break;
 
           case '24 hours':
             const value = Number(coin.price_change_percentage_24h).toFixed(2);
             // Apply green color if number is positive, red if negative
-            Math.sign(value) >= 0 ? $($td).addClass('text-success') : $($td).addClass('text-danger');
-            $($td).text(`${value}%`);
-            $($td).addClass('text-right')
-            $($row).append($td);
+            Math.sign(value) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
+            $td.text(`${value}%`);
+            $td.addClass('text-right')
+            $row.append($td);
             break;
         }
       })
