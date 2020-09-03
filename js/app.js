@@ -42,7 +42,7 @@ $(document).ready(function () {
       $('th').each(function populateRowWithData(i, th) {
         const $td = $('<td></td>');
 
-        switch ($(th).text().toLowerCase()) {
+        switch ($(th).attr('data-coin-data')) {
           case 'coin':
             $td.text(coin.symbol.toUpperCase());
             $td.addClass('font-weight-bold text-primary');
@@ -59,7 +59,7 @@ $(document).ready(function () {
             $row.append($td);
             break;
 
-          case '24 hours':
+          case '24-hours':
             const value = Number(coin.price_change_percentage_24h).toFixed(2);
             // Apply green color if number is positive, red if negative
             Math.sign(value) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
@@ -67,6 +67,14 @@ $(document).ready(function () {
             $td.addClass('text-right')
             $row.append($td);
             break;
+
+            case '7-days':
+              // insert chart here
+              // if last 7 days negative, graph red, otherwise graph green
+              $td.text('Chart goes here');
+              $td.addClass('text-right');
+              $row.append($td);
+              break;
         }
       })
 
