@@ -32,7 +32,8 @@ $(document).ready(function () {
     }],
     chart: {
       type: 'line',
-      height: '120px',
+      height: '60px',
+      width: '420px',
       sparkline: {
         enabled: true
       },
