@@ -25,12 +25,40 @@ $(document).ready(function () {
     return new Intl.NumberFormat(locale).format(number);
   }
 
-  function saveCoinData(coinData) {
-    localStorage.setItem('coinData', JSON.stringify(coinData));
+  // CHART SETTINGS
+  var chartOptions = {
+    series: [{
+      data: null
+    }],
+    chart: {
+      type: 'line',
+      height: '120px',
+      sparkline: {
+        enabled: true
+      },
+      animations: {
+        enabled: false
+      },
+    },
+    stroke: {
+      width: 1,
+    },
+    // yaxis: {
+    //     min: 0
+    // },
+    colors: ['hsl(240, 100%, 50%'],
+    tooltip: {
+      enabled: false
+    }
   }
 
-  function getCoinData() {
-    return JSON.parse(localStorage.getItem('coinData'))
+  console.log(chartOptions);
+
+  function createChart(coin) {
+    const $chartContainer = $('<div></div>').attr({
+      class: 'coin-chart',
+    });
+
   }
 
   function displayCoins(data) {
@@ -69,11 +97,23 @@ $(document).ready(function () {
             break;
 
             case '7-days':
+              const $coinSparkline = $('<div></div>').attr('class', 'coin-sparkline');
+              const options = {
+                ...chartOptions,
+                series: [{
+                  data: coin.sparkline_in_7d.price
+                }],
+                colors: [Math.sign(coin.price_change_percentage_7d_in_currency) >= 0 ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)'],
+              };
+              // options.series.data = coin.sparkline_in_7d.price;
+              console.log(options.series.data);
               // insert chart here
+              // create the chart div
               // if last 7 days negative, graph red, otherwise graph green
-              $td.text('Chart goes here');
-              $td.addClass('text-right');
+              $td.append($coinSparkline);
+              const sparkline = new ApexCharts($coinSparkline.get()[0], options);
               $row.append($td);
+              sparkline.render();
               break;
         }
       })
@@ -93,7 +133,7 @@ $(document).ready(function () {
         page: pageNumber,
         sparkline: true,
         // ids: 'bitcoin,ethereum,litecoin,cardano',
-        price_change_percentage: '24h'
+        price_change_percentage: '24h,7d'
       }
     }).done(displayCoins);
   }
