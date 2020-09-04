@@ -32,8 +32,8 @@ $(document).ready(function () {
     }],
     chart: {
       type: 'line',
-      height: '60px',
-      width: '420px',
+      height: '50px',
+      width: '135px',
       sparkline: {
         enabled: true
       },
@@ -44,16 +44,11 @@ $(document).ready(function () {
     stroke: {
       width: 1,
     },
-    // yaxis: {
-    //     min: 0
-    // },
-    colors: ['hsl(240, 100%, 50%'],
+    colors: null,
     tooltip: {
       enabled: false
     }
   }
-
-  console.log(chartOptions);
 
   function createChart(coin) {
     const $chartContainer = $('<div></div>').attr({
@@ -98,7 +93,7 @@ $(document).ready(function () {
             break;
 
             case '7-days':
-              const $coinSparkline = $('<div></div>').attr('class', 'coin-sparkline');
+              // Update the chart options with coin specific data
               const options = {
                 ...chartOptions,
                 series: [{
@@ -106,14 +101,11 @@ $(document).ready(function () {
                 }],
                 colors: [Math.sign(coin.price_change_percentage_7d_in_currency) >= 0 ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)'],
               };
-              // options.series.data = coin.sparkline_in_7d.price;
-              console.log(options.series.data);
-              // insert chart here
-              // create the chart div
-              // if last 7 days negative, graph red, otherwise graph green
-              $td.append($coinSparkline);
-              const sparkline = new ApexCharts($coinSparkline.get()[0], options);
+              // Fix the width of the td
+              $td.width('19%');
+              // $td.append($coinSparkline);
               $row.append($td);
+              const sparkline = new ApexCharts($td.get()[0], options);
               sparkline.render();
               break;
         }
