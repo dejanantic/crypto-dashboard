@@ -25,12 +25,36 @@ $(document).ready(function () {
     return new Intl.NumberFormat(locale).format(number);
   }
 
-  function saveCoinData(coinData) {
-    localStorage.setItem('coinData', JSON.stringify(coinData));
+  // CHART SETTINGS
+  var chartOptions = {
+    series: [{
+      data: null
+    }],
+    chart: {
+      type: 'line',
+      height: '50px',
+      width: '220px',
+      sparkline: {
+        enabled: true
+      },
+      animations: {
+        enabled: false
+      },
+    },
+    stroke: {
+      width: 1,
+    },
+    colors: null,
+    tooltip: {
+      enabled: false
+    }
   }
 
-  function getCoinData() {
-    return JSON.parse(localStorage.getItem('coinData'))
+  function createChart(coin) {
+    const $chartContainer = $('<div></div>').attr({
+      class: 'coin-chart',
+    });
+
   }
 
   function displayCoins(data) {
@@ -42,7 +66,7 @@ $(document).ready(function () {
       $('th').each(function populateRowWithData(i, th) {
         const $td = $('<td></td>');
 
-        switch ($(th).text().toLowerCase()) {
+        switch ($(th).attr('data-coin-data')) {
           case 'coin':
             $td.text(coin.symbol.toUpperCase());
             $td.addClass('font-weight-bold text-primary');
@@ -59,7 +83,7 @@ $(document).ready(function () {
             $row.append($td);
             break;
 
-          case '24 hours':
+          case '24-hours':
             const value = Number(coin.price_change_percentage_24h).toFixed(2);
             // Apply green color if number is positive, red if negative
             Math.sign(value) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
@@ -67,6 +91,24 @@ $(document).ready(function () {
             $td.addClass('text-right')
             $row.append($td);
             break;
+
+            case '7-days':
+              // Update the chart options with coin specific data
+              const $sparklineContainer = $('<div></div>').addClass('sparkline-container');
+              const options = {
+                ...chartOptions,
+                series: [{
+                  data: coin.sparkline_in_7d.price
+                }],
+                colors: [Math.sign(coin.price_change_percentage_7d_in_currency) >= 0 ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)'],
+              };
+              // Fix the width of the td
+              // $td.width('19%');
+              const sparkline = new ApexCharts($sparklineContainer.get()[0], options);
+              $td.append($sparklineContainer);
+              $row.append($td);
+              sparkline.render();
+              break;
         }
       })
 
@@ -85,7 +127,7 @@ $(document).ready(function () {
         page: pageNumber,
         sparkline: true,
         // ids: 'bitcoin,ethereum,litecoin,cardano',
-        price_change_percentage: '24h'
+        price_change_percentage: '24h,7d'
       }
     }).done(displayCoins);
   }
