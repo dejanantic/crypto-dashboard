@@ -102,7 +102,7 @@ $(document).ready(function () {
                 colors: [Math.sign(coin.price_change_percentage_7d_in_currency) >= 0 ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)'],
               };
               // Fix the width of the td
-              $td.width('19%');
+              //$td.width('19%');
               // $td.append($coinSparkline);
               $row.append($td);
               const sparkline = new ApexCharts($td.get()[0], options);
@@ -217,7 +217,7 @@ $(document).ready(function () {
     // Return if clicking on the ul#pagination area
     if (e.target === e.currentTarget) return;
 
-    // Return if clicking on a disabled LI or if clicking on the same page as the 
+    // Return if clicking on a disabled LI or if clicking on the same page as the
     // current page
     if ($clickedLi.hasClass('disabled') || currentPage == targetPage) {
 
