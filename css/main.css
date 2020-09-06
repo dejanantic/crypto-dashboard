@@ -16041,8 +16041,11 @@ readers do not read off random characters that represent icons */
 #crypto-table tbody tr {
   cursor: pointer;
 }
-#crypto-table tr td:first-child {
+#crypto-table tbody tr td:first-child {
   white-space: nowrap;
+}
+#crypto-table tbody tr td:last-child {
+  width: 220px;
 }
 
 /*# sourceMappingURL=main.css.map */

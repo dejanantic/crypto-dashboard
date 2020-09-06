@@ -13,9 +13,13 @@
 #crypto-table {
   tbody tr {
     cursor: pointer;
-  }
 
-  tr td:first-child {
-    white-space: nowrap;
+    & td:first-child {
+      white-space: nowrap;
+    }
+
+    & td:last-child {
+      width: 220px;
+    }
   }
 }
