@@ -33,7 +33,7 @@ $(document).ready(function () {
     chart: {
       type: 'line',
       height: '50px',
-      width: '135px',
+      width: '220px',
       sparkline: {
         enabled: true
       },
@@ -48,13 +48,6 @@ $(document).ready(function () {
     tooltip: {
       enabled: false
     }
-  }
-
-  function createChart(coin) {
-    const $chartContainer = $('<div></div>').attr({
-      class: 'coin-chart',
-    });
-
   }
 
   function displayCoins(data) {
@@ -83,31 +76,48 @@ $(document).ready(function () {
             $row.append($td);
             break;
 
-          case '24-hours':
-            const value = Number(coin.price_change_percentage_24h).toFixed(2);
+          case '1-hour':
+            const change1h = Number(coin.price_change_percentage_1h_in_currency).toFixed(2);
             // Apply green color if number is positive, red if negative
-            Math.sign(value) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
-            $td.text(`${value}%`);
+            Math.sign(change1h) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
+            $td.text(`${change1h}%`);
             $td.addClass('text-right')
             $row.append($td);
             break;
 
-            case '7-days':
-              // Update the chart options with coin specific data
-              const options = {
-                ...chartOptions,
-                series: [{
-                  data: coin.sparkline_in_7d.price
-                }],
-                colors: [Math.sign(coin.price_change_percentage_7d_in_currency) >= 0 ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)'],
-              };
-              // Fix the width of the td
-              //$td.width('19%');
-              // $td.append($coinSparkline);
-              $row.append($td);
-              const sparkline = new ApexCharts($td.get()[0], options);
-              sparkline.render();
-              break;
+          case '24-hours':
+            const change24h = Number(coin.price_change_percentage_24h).toFixed(2);
+            // Apply green color if number is positive, red if negative
+            Math.sign(change24h) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
+            $td.text(`${change24h}%`);
+            $td.addClass('text-right')
+            $row.append($td);
+            break;
+
+          case '7-days':
+            const change7d = Number(coin.price_change_percentage_7d_in_currency).toFixed(2);
+            // Apply green color if number is positive, red if negative
+            Math.sign(change7d) >= 0 ? $td.addClass('text-success') : $td.addClass('text-danger');
+            $td.text(`${change7d}%`);
+            $td.addClass('text-right')
+            $row.append($td);
+            break;
+
+          case 'sparkline':
+            // Update the chart options with coin specific data
+            const $sparklineContainer = $('<div></div>').addClass('sparkline-container');
+            const options = {
+              ...chartOptions,
+              series: [{
+                data: coin.sparkline_in_7d.price
+              }],
+              colors: [Math.sign(coin.price_change_percentage_7d_in_currency) >= 0 ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)'],
+            };
+            const sparkline = new ApexCharts($sparklineContainer.get()[0], options);
+            $td.append($sparklineContainer);
+            $row.append($td);
+            sparkline.render();
+            break;
         }
       })
 
@@ -126,7 +136,7 @@ $(document).ready(function () {
         page: pageNumber,
         sparkline: true,
         // ids: 'bitcoin,ethereum,litecoin,cardano',
-        price_change_percentage: '24h,7d'
+        price_change_percentage: '1h,24h,7d'
       }
     }).done(displayCoins);
   }
