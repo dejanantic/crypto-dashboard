@@ -1,4 +1,26 @@
-$(document).ready(function () {
+const loaderMethods = (function() {
+  // Loader
+  function loader(element) {
+    const $mainContent = $('.main-content');
+    const $loader = $('<div></div>').addClass('loader');
+    const $spinner = $('<div></div>').addClass('spinner');
+    $loader.append($spinner);
+    element ? $(element).append($loader) : $($mainContent).append($loader);
+  }
+  
+  // remove loader
+  function removeLoader() {
+    $('.loader').remove();
+  }
+
+  return {
+    create: loader,
+    remove: removeLoader
+  }
+
+})();
+
+$(document).ready(function () { 
 
   // Save sidebar state (open/close) to local storage
   function updateSidebarState() {

@@ -1,4 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
+
+    loaderMethods.create();
+    
     function getCoinThumbnail(coin) {
         const $span = $('<span></span>');
         $span.addClass('coin-image mr-2');
@@ -20,7 +23,7 @@ $(document).ready(function() {
     function formatNumber(number, locale = 'en-US') {
         return new Intl.NumberFormat(locale).format(number);
     }
-
+    
     // ApexCharts settings
     var chartOptions = {
         series: [{
@@ -47,6 +50,7 @@ $(document).ready(function() {
     }
 
     function displayCoins(data) {
+
         const $table = $('#crypto-table tbody');
 
         $.each(data, function addTableRow(i, coin) {
@@ -119,6 +123,8 @@ $(document).ready(function() {
 
             $table.append($row);
         })
+
+        loaderMethods.remove();
     }
 
     // Fetch coins -- use it for pagination
@@ -145,10 +151,14 @@ $(document).ready(function() {
 
     // Show coin details
     $('#crypto-table').click(function (e) {
+
         const $parentTr = $(e.target).closest('tr');
         if (!$parentTr.attr('data-coin-id')) return;
 
         const id = $parentTr.attr('data-coin-id');
+
+        // Create loader
+        loaderMethods.create($('.coin-details'));
 
         // Show coin details section here
         showCoinDetailsSection();
@@ -195,6 +205,8 @@ $(document).ready(function() {
         $('#market-cap').text(formatCoinPrice(coinData.market_data.market_cap.usd));
         $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
         $('#low-high').text(`${formatCoinPrice(coinData.market_data.low_24h.usd)} / ${formatCoinPrice(coinData.market_data.high_24h.usd)}`);
+
+        loaderMethods.remove();
     }
 
     $('#close-details-section').click(function () {
@@ -208,6 +220,8 @@ $(document).ready(function() {
 
     // Pagination functionality
     $('#pagination').click(function changeCoinPage(e) {
+        hideCoinDetailsSection();
+        loaderMethods.create();
 
         const $clickedLi = $(e.target).closest('li');
         const $cryptoTable = $('#crypto-table');

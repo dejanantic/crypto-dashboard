@@ -7,6 +7,8 @@
   padding: 5.5rem 0.5rem 2rem;
   overflow-x: hidden;
   transition: 0.5s;
+  background-color: white;
+  z-index: $zindex-popover;
   // bootstrap mixin use example
   // @include media-breakpoint-down(lg) {
   //   background-color: hotpink;
