@@ -3,6 +3,9 @@
   transition: 0.5s;
 
   .main-content {
-    padding: 2rem 3rem 3rem;
+    padding: 1rem 1.5rem 1.5rem;
+    @include media-breakpoint-up(md) {
+      padding: 2rem 3rem 3rem;
+    }
   }
 }

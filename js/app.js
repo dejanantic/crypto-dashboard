@@ -227,7 +227,7 @@ $(document).ready(function () {
     // Return if clicking on the ul#pagination area
     if (e.target === e.currentTarget) return;
 
-    // Return if clicking on a disabled LI or if clicking on the same page as the 
+    // Return if clicking on a disabled LI or if clicking on the same page as the
     // current page
     if ($clickedLi.hasClass('disabled') || currentPage == targetPage) {
 
