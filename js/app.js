@@ -1,4 +1,4 @@
-const loaderMethods = (function() {
+const loaderMethods = (function () {
   // Loader
   function loader(element) {
     const $mainContent = $('.main-content');
@@ -7,7 +7,7 @@ const loaderMethods = (function() {
     $loader.append($spinner);
     element ? $(element).append($loader) : $($mainContent).append($loader);
   }
-  
+
   // remove loader
   function removeLoader() {
     $('.loader').remove();
@@ -15,20 +15,20 @@ const loaderMethods = (function() {
 
   return {
     create: loader,
-    remove: removeLoader
-  }
-
+    remove: removeLoader,
+  };
 })();
 
-$(document).ready(function () { 
-
+$(document).ready(function () {
   // Save sidebar state (open/close) to local storage
   function updateSidebarState() {
-    const sidebarState = localStorage.getItem('sidebarState') ? localStorage.getItem('sidebarState') : 'open';
+    const sidebarState = localStorage.getItem('sidebarState')
+      ? localStorage.getItem('sidebarState')
+      : 'open';
     if (sidebarState === 'open') $('.sidebar').removeClass('collapsed');
     else $('.sidebar').addClass('collapsed');
   }
-  
+
   // Update sidebarState
   updateSidebarState();
 
@@ -43,6 +43,5 @@ $(document).ready(function () {
       $sidebar.addClass('collapsed');
       localStorage.setItem('sidebarState', 'closed');
     }
-  })
-
+  });
 });
