@@ -66,7 +66,7 @@ $(document).ready(function () {
           case 'coin':
             $td.text(coin.symbol.toUpperCase());
             $td.addClass('font-weight-bold text-primary');
-            $td.prepend(getCoinThumbnail(coin));
+            $td.prepend(getCoinThumbnail(coin))
             // $td.append(getCoinSymbol(coin));
             $row.append($td);
             break;

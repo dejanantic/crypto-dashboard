@@ -2,7 +2,7 @@
   "name": "crypto_dashboard",
   "version": "1.0.0",
   "description": "A nifty little dashboard to give you a quick glance over your crypto portfolio.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "sass-watch": "sass --watch scss/main.scss css/main.css"
   },
@@ -17,6 +17,10 @@
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.1",
     "sass": "^1.26.9"
   }
 }

@@ -19,6 +19,8 @@ const loaderMethods = (function () {
   };
 })();
 
+let name = "Dejan";
+
 $(document).ready(function () {
   // Save sidebar state (open/close) to local storage
   function updateSidebarState() {
