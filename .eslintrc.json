@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jquery": true
   },
   "extends": ["airbnb-base", "plugin:prettier/recommended"],
   "parserOptions": {
@@ -12,8 +13,12 @@
     "prettier/prettier": [
       "error",
       {
-        "singleQuote": false
+        "singleQuote": true,
+        "endOfLine": "auto"
       }
-    ]
+    ],
+    "func-names": "off",
+    "no-undef": "warn",
+    "no-unused-vars": "warn"
   }
 }

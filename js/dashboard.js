@@ -1,6 +1,4 @@
 $(document).ready(function () {
-  loaderMethods.create();
-
   function getCoinThumbnail(coin) {
     const $span = $('<span></span>');
     $span.addClass('coin-image mr-2');
@@ -18,16 +16,12 @@ $(document).ready(function () {
   function formatCoinPrice(price, locale = 'en-US', currency = 'USD') {
     return new Intl.NumberFormat(locale, {
       style: 'currency',
-      currency: currency,
+      currency,
     }).format(price);
   }
 
-  function formatNumber(number, locale = 'en-US') {
-    return new Intl.NumberFormat(locale).format(number);
-  }
-
   // ApexCharts settings
-  var chartOptions = {
+  const chartOptions = {
     series: [
       {
         data: null,
@@ -59,66 +53,76 @@ $(document).ready(function () {
     $.each(data, function addTableRow(i, coin) {
       const $row = $('<tr></tr>').attr('data-coin-id', coin.id);
 
-      $('th').each(function populateRowWithData(i, th) {
+      $('th').each(function populateRowWithData(j, th) {
         const $td = $('<td></td>');
 
         switch ($(th).attr('data-coin-data')) {
           case 'coin':
             $td.text(coin.symbol.toUpperCase());
             $td.addClass('font-weight-bold text-primary');
-            $td.prepend(getCoinThumbnail(coin))
+            $td.prepend(getCoinThumbnail(coin));
             // $td.append(getCoinSymbol(coin));
             $row.append($td);
             break;
 
-          case 'price':
+          case 'price': {
             const coinPrice = coin.current_price;
             const formattedValue = formatCoinPrice(coinPrice);
             $td.text(formattedValue);
             $td.addClass('text-right');
             $row.append($td);
             break;
+          }
 
-          case '1-hour':
+          case '1-hour': {
             const change1h = Number(
               coin.price_change_percentage_1h_in_currency
             ).toFixed(2);
             // Apply green color if number is positive, red if negative
-            Math.sign(change1h) >= 0
-              ? $td.addClass('text-success')
-              : $td.addClass('text-danger');
+            if (Math.sign(change1h) >= 0) {
+              $td.addClass('text-success');
+            } else {
+              $td.addClass('text-danger');
+            }
             $td.text(`${change1h}%`);
             $td.addClass('text-right');
             $row.append($td);
             break;
+          }
 
-          case '24-hours':
+          case '24-hours': {
             const change24h = Number(coin.price_change_percentage_24h).toFixed(
               2
             );
             // Apply green color if number is positive, red if negative
-            Math.sign(change24h) >= 0
-              ? $td.addClass('text-success')
-              : $td.addClass('text-danger');
+            if (Math.sign(change24h) >= 0) {
+              $td.addClass('text-success');
+            } else {
+              $td.addClass('text-danger');
+            }
             $td.text(`${change24h}%`);
             $td.addClass('text-right');
             $row.append($td);
             break;
+          }
 
-          case '7-days':
+          case '7-days': {
             const change7d = Number(
               coin.price_change_percentage_7d_in_currency
             ).toFixed(2);
             // Apply green color if number is positive, red if negative
-            Math.sign(change7d) >= 0
-              ? $td.addClass('text-success')
-              : $td.addClass('text-danger');
+            if (Math.sign(change7d) >= 0) {
+              $td.addClass('text-success');
+            } else {
+              $td.addClass('text-danger');
+            }
             $td.text(`${change7d}%`);
             $td.addClass('text-right');
             $row.append($td);
             break;
+          }
 
-          case 'sparkline':
+          default: {
             // Update the chart options with coin specific data
             const $sparklineContainer = $('<div></div>').addClass(
               'sparkline-container'
@@ -144,6 +148,7 @@ $(document).ready(function () {
             $row.append($td);
             sparkline.render();
             break;
+          }
         }
       });
 
@@ -185,11 +190,39 @@ $(document).ready(function () {
     // Create loader
     loaderMethods.create($('.coin-details'));
 
-    // Show coin details section here
+    function showCoinDetailsSection() {
+      const $coinDetailsSection = $('#coin-details');
+
+      if ($coinDetailsSection.attr('data-status') === 'hidden') {
+        $coinDetailsSection.slideDown();
+        $coinDetailsSection.attr('data-status', 'open');
+      }
+    }
+
     showCoinDetailsSection();
 
-    // Scroll to top
-    // $(window).scrollTop(0);
+    function displayCoinDetails(coinData) {
+      $('#coin-name').text(coinData.name);
+      $('#coin-symbol').text(coinData.symbol.toUpperCase());
+      $('#coin-image').attr({
+        src: coinData.image.small,
+        alt: `${coinData.name} image`,
+      });
+      $('#coin-price').text(
+        formatCoinPrice(coinData.market_data.current_price.usd)
+      );
+      $('#market-cap').text(
+        formatCoinPrice(coinData.market_data.market_cap.usd)
+      );
+      $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
+      $('#low-high').text(
+        `${formatCoinPrice(
+          coinData.market_data.low_24h.usd
+        )} / ${formatCoinPrice(coinData.market_data.high_24h.usd)}`
+      );
+
+      loaderMethods.remove();
+    }
 
     $.ajax({
       url: `https://api.coingecko.com/api/v3/coins/${id}`,
@@ -203,41 +236,11 @@ $(document).ready(function () {
     }).done(displayCoinDetails);
   });
 
-  function showCoinDetailsSection() {
-    const $coinDetailsSection = $('#coin-details');
-
-    if ($coinDetailsSection.attr('data-status') === 'hidden') {
-      $coinDetailsSection.slideDown();
-      $coinDetailsSection.attr('data-status', 'open');
-    }
-  }
-
   function hideCoinDetailsSection() {
     const $coinDetailsSection = $('#coin-details');
 
     $coinDetailsSection.attr('data-status', 'hidden');
-    $coinDetailsSection.slideToggle();
-  }
-
-  function displayCoinDetails(coinData) {
-    $('#coin-name').text(coinData.name);
-    $('#coin-symbol').text(coinData.symbol.toUpperCase());
-    $('#coin-image').attr({
-      src: coinData.image.small,
-      alt: `${coinData.name} image`,
-    });
-    $('#coin-price').text(
-      formatCoinPrice(coinData.market_data.current_price.usd)
-    );
-    $('#market-cap').text(formatCoinPrice(coinData.market_data.market_cap.usd));
-    $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
-    $('#low-high').text(
-      `${formatCoinPrice(coinData.market_data.low_24h.usd)} / ${formatCoinPrice(
-        coinData.market_data.high_24h.usd
-      )}`
-    );
-
-    loaderMethods.remove();
+    $coinDetailsSection.hide();
   }
 
   $('#close-details-section').click(function () {
@@ -252,12 +255,11 @@ $(document).ready(function () {
   // Pagination functionality
   $('#pagination').click(function changeCoinPage(e) {
     hideCoinDetailsSection();
-    loaderMethods.create();
 
     const $clickedLi = $(e.target).closest('li');
     const $cryptoTable = $('#crypto-table');
     const $liPrevious = $('li[data-page=previous]');
-    const currentPage = $('#crypto-table').attr('data-page');
+    const currentPage = +$('#crypto-table').attr('data-page');
     const targetPage = $clickedLi.attr('data-page');
     const $ellipsisLi = $(`
       <li class="page-item disabled" id="ellipsis">
@@ -269,14 +271,16 @@ $(document).ready(function () {
 
     // Return if clicking on a disabled LI or if clicking on the same page as the
     // current page
-    if ($clickedLi.hasClass('disabled') || currentPage == targetPage) {
+    if ($clickedLi.hasClass('disabled') || currentPage === targetPage) {
       // Prevent anchor element's default behavior (scolling to the top)
       e.preventDefault();
       return;
     }
 
+    loaderMethods.create();
+
     // Check if click happened on previous/next buttons
-    if (isNaN(targetPage)) {
+    if (Number.isNaN(+targetPage)) {
       if (targetPage === 'next') {
         const newPage = +currentPage + 1;
         clearTableBody();
@@ -301,18 +305,20 @@ $(document).ready(function () {
     }
 
     // Remove .disabled class on LI "previous" if page is not 1
-    $cryptoTable.attr('data-page') != 1
-      ? $liPrevious.removeClass('disabled')
-      : $liPrevious.addClass('disabled');
+    if (+$cryptoTable.attr('data-page') !== 1) {
+      $liPrevious.removeClass('disabled');
+    } else {
+      $liPrevious.addClass('disabled');
+    }
 
     // If page is greater than 3, add LI "ellipsis" and update the LI numbers accordingly
     // Else, remove the LI "ellipsis" and update the LI numbers accordingly
-    if ($cryptoTable.attr('data-page') > 3) {
+    if (Number($cryptoTable.attr('data-page')) > 3) {
       // If LI "ellipsis" doesn't exist in pagination, add one
       if ($('#ellipsis').length === 0) $('li[data-page=1]').after($ellipsisLi);
 
       // update li numbers
-      let liPageNumberStart = $('#crypto-table').attr('data-page') - 1;
+      let liPageNumberStart = +$('#crypto-table').attr('data-page') - 1;
 
       // Get the last two numbered LIs
       $('li.page-item')
@@ -325,7 +331,8 @@ $(document).ready(function () {
           $this.attr('data-page', liPageNumberStart);
 
           // Update the anchor text and increase liPageNumberStart
-          $this.children().text(liPageNumberStart++);
+          $this.children().text(liPageNumberStart);
+          liPageNumberStart += 1;
         });
     } else {
       // Remove LI "ellipsis" if it exists
@@ -344,7 +351,8 @@ $(document).ready(function () {
           $this.attr('data-page', liPageNumberStart);
 
           // Update the anchor text
-          $this.children().text(liPageNumberStart++);
+          $this.children().text(liPageNumberStart);
+          liPageNumberStart += 1;
         });
     }
 
