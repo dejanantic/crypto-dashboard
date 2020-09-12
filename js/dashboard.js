@@ -141,7 +141,7 @@ $(document).ready(function () {
               ],
             };
             const sparkline = new ApexCharts(
-              $sparklineContainer.get()[0],
+              $sparklineContainer.get(0),
               options
             );
             $td.append($sparklineContainer);
@@ -168,7 +168,6 @@ $(document).ready(function () {
         per_page: 50,
         page: pageNumber,
         sparkline: true,
-        // ids: 'bitcoin,ethereum,litecoin,cardano',
         price_change_percentage: '1h,24h,7d',
       },
     }).done(displayCoins);
@@ -181,6 +180,95 @@ $(document).ready(function () {
   });
 
   // Show coin details
+  function showCoinDetailsSection() {
+    const $coinDetailsSection = $('#coin-details');
+
+    if ($coinDetailsSection.attr('data-status') === 'hidden') {
+      $coinDetailsSection.slideDown();
+      $coinDetailsSection.attr('data-status', 'open');
+    }
+  }
+
+  function manipulateSparklineData(sparklineData) {
+    const totalHours = sparklineData.length;
+    const now = new Date().getTime();
+    const updatedSeries = sparklineData.map((val, i) => {
+      const dateObj = new Date(now);
+      const timestamp = dateObj.setHours(dateObj.getHours() - totalHours + i);
+      return [timestamp, val];
+    });
+
+    return updatedSeries;
+  }
+
+  function displayCoinDetails(coinData) {
+    $('#coin-name').text(coinData.name);
+
+    $('#coin-symbol').text(coinData.symbol.toUpperCase());
+
+    $('#coin-image').attr({
+      src: coinData.image.small,
+      alt: `${coinData.name} image`,
+    });
+
+    $('#coin-price').text(
+      formatCoinPrice(coinData.market_data.current_price.usd)
+    );
+
+    $('#market-cap').text(formatCoinPrice(coinData.market_data.market_cap.usd));
+    $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
+
+    $('#low-high').text(
+      `${formatCoinPrice(coinData.market_data.low_24h.usd)} / ${formatCoinPrice(
+        coinData.market_data.high_24h.usd
+      )}`
+    );
+
+    const detailsChartOptions = {
+      chart: {
+        type: 'area',
+        height: 150,
+        toolbar: { show: true },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        labels: { show: true },
+        type: 'datetime',
+      },
+      yaxis: {
+        seriesName: 'Price USD',
+        labels: {
+          formatter(val) {
+            return val.toFixed(2);
+          },
+        },
+      },
+      tooltip: {
+        x: {
+          format: 'dd/MM/yy HH:mm',
+        },
+      },
+      stroke: { width: 2 },
+      series: [
+        {
+          name: 'Price',
+          data: manipulateSparklineData(
+            coinData.market_data.sparkline_7d.price
+          ),
+        },
+      ],
+    };
+
+    // Coin chart goes here
+    const chart = new ApexCharts($('#coin-chart').get(0), detailsChartOptions);
+    chart.render();
+
+    // Wait 10 miliseconds to hide the pictures changing
+    setTimeout(loaderMethods.remove, 10);
+  }
+
   $('#crypto-table').click(function (e) {
     const $parentTr = $(e.target).closest('tr');
     if (!$parentTr.attr('data-coin-id')) return;
@@ -190,39 +278,7 @@ $(document).ready(function () {
     // Create loader
     loaderMethods.create($('.coin-details'));
 
-    function showCoinDetailsSection() {
-      const $coinDetailsSection = $('#coin-details');
-
-      if ($coinDetailsSection.attr('data-status') === 'hidden') {
-        $coinDetailsSection.slideDown();
-        $coinDetailsSection.attr('data-status', 'open');
-      }
-    }
-
     showCoinDetailsSection();
-
-    function displayCoinDetails(coinData) {
-      $('#coin-name').text(coinData.name);
-      $('#coin-symbol').text(coinData.symbol.toUpperCase());
-      $('#coin-image').attr({
-        src: coinData.image.small,
-        alt: `${coinData.name} image`,
-      });
-      $('#coin-price').text(
-        formatCoinPrice(coinData.market_data.current_price.usd)
-      );
-      $('#market-cap').text(
-        formatCoinPrice(coinData.market_data.market_cap.usd)
-      );
-      $('#volume').text(formatCoinPrice(coinData.market_data.total_volume.usd));
-      $('#low-high').text(
-        `${formatCoinPrice(
-          coinData.market_data.low_24h.usd
-        )} / ${formatCoinPrice(coinData.market_data.high_24h.usd)}`
-      );
-
-      loaderMethods.remove();
-    }
 
     $.ajax({
       url: `https://api.coingecko.com/api/v3/coins/${id}`,
