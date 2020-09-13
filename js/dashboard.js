@@ -20,33 +20,6 @@ $(document).ready(function () {
     }).format(price);
   }
 
-  // ApexCharts settings
-  const chartOptions = {
-    series: [
-      {
-        data: null,
-      },
-    ],
-    chart: {
-      type: 'line',
-      height: '50px',
-      width: '220px',
-      sparkline: {
-        enabled: true,
-      },
-      animations: {
-        enabled: false,
-      },
-    },
-    stroke: {
-      width: 1,
-    },
-    colors: null,
-    tooltip: {
-      enabled: false,
-    },
-  };
-
   function displayCoins(data) {
     const $table = $('#crypto-table tbody');
 
@@ -127,22 +100,40 @@ $(document).ready(function () {
             const $sparklineContainer = $('<div></div>').addClass(
               'sparkline-container'
             );
-            const options = {
-              ...chartOptions,
+
+            const chartOptions = {
               series: [
                 {
                   data: coin.sparkline_in_7d.price,
                 },
               ],
+              chart: {
+                type: 'line',
+                height: '50px',
+                width: '220px',
+                sparkline: {
+                  enabled: true,
+                },
+                animations: {
+                  enabled: false,
+                },
+              },
+              stroke: {
+                width: 1,
+              },
               colors: [
                 Math.sign(coin.price_change_percentage_7d_in_currency) >= 0
                   ? 'hsl(120, 100%, 50%)'
                   : 'hsl(0, 100%, 50%)',
               ],
+              tooltip: {
+                enabled: false,
+              },
             };
+
             const sparkline = new ApexCharts(
               $sparklineContainer.get(0),
-              options
+              chartOptions
             );
             $td.append($sparklineContainer);
             $row.append($td);
@@ -201,6 +192,45 @@ $(document).ready(function () {
     return updatedSeries;
   }
 
+  const coinDetailsChart = new ApexCharts($('#coin-chart').get(0), {
+    // Chart options
+    chart: {
+      type: 'area',
+      height: 150,
+      toolbar: { show: true },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      labels: { show: true },
+      type: 'datetime',
+    },
+    yaxis: {
+      seriesName: 'Price USD',
+      labels: {
+        show: true,
+        formatter(val) {
+          if (Math.round(val) <= 1) return val.toFixed(5);
+          return val.toFixed(2);
+        },
+      },
+    },
+    tooltip: {
+      x: {
+        format: 'dd/MM/yy HH:mm',
+      },
+    },
+    stroke: { width: 2 },
+    // The series will be updated with the AJAX request
+    series: [],
+    noData: {
+      text: 'Loading...',
+    },
+  });
+
+  coinDetailsChart.render();
+
   function displayCoinDetails(coinData) {
     $('#coin-name').text(coinData.name);
 
@@ -224,46 +254,12 @@ $(document).ready(function () {
       )}`
     );
 
-    const detailsChartOptions = {
-      chart: {
-        type: 'area',
-        height: 150,
-        toolbar: { show: true },
+    coinDetailsChart.updateSeries([
+      {
+        name: 'Price USD',
+        data: manipulateSparklineData(coinData.market_data.sparkline_7d.price),
       },
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        labels: { show: true },
-        type: 'datetime',
-      },
-      yaxis: {
-        seriesName: 'Price USD',
-        labels: {
-          formatter(val) {
-            return val.toFixed(2);
-          },
-        },
-      },
-      tooltip: {
-        x: {
-          format: 'dd/MM/yy HH:mm',
-        },
-      },
-      stroke: { width: 2 },
-      series: [
-        {
-          name: 'Price',
-          data: manipulateSparklineData(
-            coinData.market_data.sparkline_7d.price
-          ),
-        },
-      ],
-    };
-
-    // Coin chart goes here
-    const chart = new ApexCharts($('#coin-chart').get(0), detailsChartOptions);
-    chart.render();
+    ]);
 
     // Wait 10 miliseconds to hide the pictures changing
     setTimeout(loaderMethods.remove, 10);
