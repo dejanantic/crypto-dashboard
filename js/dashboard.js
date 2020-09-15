@@ -231,6 +231,10 @@ $(document).ready(function () {
       {
         breakpoint: 576,
         options: {
+          chart: {
+            height: 150,
+            toolbar: { show: false },
+          },
           yaxis: {
             labels: {
               show: false,
