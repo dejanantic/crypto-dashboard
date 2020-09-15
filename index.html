@@ -56,49 +56,68 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <!-- Simple Bootstrap -->
-            <div class="row mb-4">
-              <div class="col-sm-6 col-md-3">
-                <div class="coin-card mb-3 d-flex">
-                  <img
-                    src=""
-                    alt="Coin image"
-                    class="coin-image"
-                    id="coin-image"
-                  />
-                  <div class="coin-id ml-3">
-                    <h5 class="coin-name card-title" id="coin-name"></h5>
-                    <h6
-                      class="coin-symbol card-subtitle text-muted"
-                      id="coin-symbol"
-                    ></h6>
+            <div class="row mb-2">
+              <!-- First column -->
+              <div class="col-sm-12 col-md-12">
+                <!-- Row for the card, price and meta -->
+                <div class="row">
+                  <!-- Coin card -->
+                  <div class="col-sm-12 col-md-6 basic-coin-data">
+                    <div class="row">
+                      <div class="col-sm-6 col-md-12 mb-md-3">
+                        <div class="coin-card d-flex">
+                          <img
+                            src=""
+                            alt="Coin image"
+                            class="coin-image"
+                            id="coin-image"
+                          />
+                          <div class="coin-id ml-3">
+                            <h5
+                              class="coin-name card-title"
+                              id="coin-name"
+                            ></h5>
+                            <h6
+                              class="coin-symbol card-subtitle text-muted"
+                              id="coin-symbol"
+                            ></h6>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Coin price -->
+                      <div class="col-sm-6 col-md-12">
+                        <p class="current-price h1" id="coin-price"></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Coin meta -->
+                  <div class="col-sm-12 col-md-6">
+                    <div class="coin-extras">
+                      <div class="market-cap d-flex border-bottom mb-2">
+                        <p class="font-weight-bold d-inline-block mr-auto">
+                          Market cap
+                        </p>
+                        <p id="market-cap"></p>
+                      </div>
+                      <div class="market-cap d-flex border-bottom mb-3">
+                        <p class="font-weight-bold d-inline-block mr-auto">
+                          24h Vol
+                        </p>
+                        <p id="volume"></p>
+                      </div>
+                      <div class="market-cap d-flex">
+                        <p class="font-weight-bold d-inline-block mr-auto">
+                          24h Low/High
+                        </p>
+                        <p id="low-high"></p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <p class="current-price display-4" id="coin-price"></p>
               </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="coin-extras">
-                  <div class="market-cap d-flex border-bottom mb-2">
-                    <p class="font-weight-bold d-inline-block mr-auto">
-                      Market cap
-                    </p>
-                    <p id="market-cap"></p>
-                  </div>
-                  <div class="market-cap d-flex border-bottom mb-3">
-                    <p class="font-weight-bold d-inline-block mr-auto">
-                      24h Volume
-                    </p>
-                    <p id="volume"></p>
-                  </div>
-                  <div class="market-cap d-flex">
-                    <p class="font-weight-bold d-inline-block mr-auto">
-                      24h Low/High
-                    </p>
-                    <p id="low-high"></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-12 col-md-6">
+              <!-- Second column -->
+              <div class="col-sm-12 col-md-12 px-0">
                 <div class="coin-chart" id="coin-chart"></div>
               </div>
             </div>
@@ -137,7 +156,7 @@
               </tbody>
             </table>
           </div>
-          <nav aria-label="Coin page navigation">
+          <nav aria-label="Coin page navigation" class="mt-3">
             <ul class="pagination justify-content-center" id="pagination">
               <li class="page-item disabled" data-page="previous">
                 <a class="page-link" href="#">Previous</a>

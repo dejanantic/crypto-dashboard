@@ -1,3 +1,25 @@
 #coin-details {
   position: relative;
+
+  .coin-card {
+    @include media-breakpoint-down(xs) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .coin-extras {
+    @include media-breakpoint-down(sm) {
+      margin-top: 2rem;
+    }
+
+    .market-cap p:last-of-type {
+      text-align: right;
+    }
+  }
+
+  #coin-price {
+    @include media-breakpoint-only(sm) {
+      text-align: right;
+    }
+  }
 }

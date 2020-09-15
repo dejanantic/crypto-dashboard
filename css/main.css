@@ -15998,6 +15998,24 @@ readers do not read off random characters that represent icons */
 #coin-details {
   position: relative;
 }
+@media (max-width: 575.98px) {
+  #coin-details .coin-card {
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 767.98px) {
+  #coin-details .coin-extras {
+    margin-top: 2rem;
+  }
+}
+#coin-details .coin-extras .market-cap p:last-of-type {
+  text-align: right;
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+  #coin-details #coin-price {
+    text-align: right;
+  }
+}
 
 .app-main {
   padding-left: 11rem;
@@ -16007,6 +16025,11 @@ readers do not read off random characters that represent icons */
   padding: 2rem 3rem 3rem;
   position: relative;
   min-height: calc(100vh - 89px);
+}
+@media (max-width: 1199.98px) {
+  .app-main .main-content {
+    padding: 2rem 1rem 3rem;
+  }
 }
 
 .sidebar {

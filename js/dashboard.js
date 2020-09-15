@@ -196,7 +196,7 @@ $(document).ready(function () {
     // Chart options
     chart: {
       type: 'area',
-      height: 150,
+      height: 225,
       toolbar: { show: true },
     },
     dataLabels: {
@@ -227,6 +227,22 @@ $(document).ready(function () {
     noData: {
       text: 'Loading...',
     },
+    responsive: [
+      {
+        breakpoint: 576,
+        options: {
+          yaxis: {
+            labels: {
+              show: false,
+              formatter(val) {
+                if (Math.round(val) <= 1) return val.toFixed(5);
+                return val.toFixed(2);
+              },
+            },
+          },
+        },
+      },
+    ],
   });
 
   coinDetailsChart.render();
@@ -292,7 +308,7 @@ $(document).ready(function () {
     const $coinDetailsSection = $('#coin-details');
 
     $coinDetailsSection.attr('data-status', 'hidden');
-    $coinDetailsSection.hide();
+    $coinDetailsSection.slideUp();
   }
 
   $('#close-details-section').click(function () {
