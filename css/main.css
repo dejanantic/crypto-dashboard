@@ -15997,6 +15997,24 @@ readers do not read off random characters that represent icons */
 
 #coin-details {
   position: relative;
+  background-color: white;
+}
+#coin-details.sticky-details {
+  position: fixed;
+  top: 0;
+  width: calc(100% - 166px);
+  z-index: 1050;
+  padding-top: 2rem;
+}
+@media (max-width: 1199.98px) {
+  #coin-details.sticky-details {
+    width: calc(100% - 102px);
+  }
+}
+@media (max-width: 575.98px) {
+  #coin-details.sticky-details {
+    padding-top: 1rem;
+  }
 }
 @media (max-width: 575.98px) {
   #coin-details .coin-card {
@@ -16005,7 +16023,7 @@ readers do not read off random characters that represent icons */
 }
 @media (max-width: 767.98px) {
   #coin-details .coin-extras {
-    margin-top: 2rem;
+    margin-top: 1rem;
   }
 }
 #coin-details .coin-extras .market-cap p:last-of-type {
@@ -16017,13 +16035,26 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.sticky-details + .table-container {
+  padding-top: 386px;
+}
+
 .app-main {
   padding-left: 11rem;
   transition: 0.5s;
 }
+.app-main .header {
+  padding: 1rem 3rem;
+}
+@media (max-width: 575.98px) {
+  .app-main .header {
+    padding: 1rem 1rem;
+  }
+}
 .app-main .main-content {
   padding: 2rem 3rem 3rem;
   position: relative;
+  overflow: hidden;
   min-height: calc(100vh - 89px);
 }
 @media (max-width: 1199.98px) {

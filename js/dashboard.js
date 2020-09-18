@@ -285,6 +285,23 @@ $(document).ready(function () {
     setTimeout(loaderMethods.remove, 10);
   }
 
+  // Coin details sticky section
+  // Milos review
+  $(window).on('scroll', function () {
+    const $coinDetailsSection = $('#coin-details');
+    const isCoinDetailsOpen =
+      $coinDetailsSection.attr('data-status') === 'open';
+    // const sticky = $coinDetailsSection.get(0).offsetTop;
+
+    // 89 is the height of the header ??? why 72
+    if (window.pageYOffset > 72 && isCoinDetailsOpen) {
+      $coinDetailsSection.addClass('sticky-details');
+    } else {
+      $coinDetailsSection.removeClass('sticky-details');
+    }
+  });
+
+  // CRYPTO TABLE FUNCTIONALITY
   $('#crypto-table').click(function (e) {
     const $parentTr = $(e.target).closest('tr');
     if (!$parentTr.attr('data-coin-id')) return;
@@ -310,9 +327,11 @@ $(document).ready(function () {
 
   function hideCoinDetailsSection() {
     const $coinDetailsSection = $('#coin-details');
+    const isCoinDetailsSticky = $coinDetailsSection.hasClass('sticky-details');
 
     $coinDetailsSection.attr('data-status', 'hidden');
     $coinDetailsSection.slideUp();
+    if (isCoinDetailsSticky) $coinDetailsSection.removeClass('sticky-details');
   }
 
   $('#close-details-section').click(function () {
