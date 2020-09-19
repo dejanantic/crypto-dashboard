@@ -9,7 +9,7 @@
 
   <body>
     <div class="app-container">
-      <aside class="sidebar border-right">
+      <aside class="sidebar border-right" id="sidebar">
         <button class="sidebar-toggle btn" id="sidebar-toggle">
           <i class="fas fa-angle-double-right"></i>
         </button>
@@ -39,22 +39,12 @@
           </li>
         </ul>
       </aside>
-      <main class="app-main">
+      <main class="app-main" id="app-main">
         <header
-          class="sticky-top border-bottom justify-content-between bg-white align-items-center px-5 py-3 d-flex"
+          class="header border-bottom justify-content-between bg-white align-items-center d-flex"
         >
-          <div id="logo" class="logo h1">Crypto Tracker</div>
-          <form class="form-inline w-50">
-            <input
-              class="form-control mr-sm-2 flex-grow-1"
-              type="search"
-              placeholder="Search coins"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
+          <div id="logo" class="logo h1 d-none d-md-block">Crypto Tracker</div>
+          <div id="logo-small" class="logo h3 d-md-none">Crypto Tracker</div>
         </header>
         <article class="main-content">
           <h1>Transactions</h1>

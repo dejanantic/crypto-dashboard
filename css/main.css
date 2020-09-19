@@ -9917,6 +9917,14 @@ h3 {
     transform: rotate(360deg);
   }
 }
+.transition-3 {
+  transition: all 0.3s ease-out;
+}
+
+.transition-5 {
+  transition: all 0.5s ease-out;
+}
+
 /*!
  * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -16038,10 +16046,19 @@ readers do not read off random characters that represent icons */
 .sticky-details + .table-container {
   padding-top: 386px;
 }
+@media (max-width: 991.98px) {
+  .sticky-details + .table-container {
+    padding-top: 303px;
+  }
+}
+@media (max-width: 767.98px) {
+  .sticky-details + .table-container {
+    padding-top: 443px;
+  }
+}
 
 .app-main {
   padding-left: 4.4rem;
-  transition: 0.5s;
 }
 .app-main .header {
   padding: 1rem 3rem;
@@ -16071,7 +16088,6 @@ readers do not read off random characters that represent icons */
   height: 100vh;
   padding: 5.5rem 0.5rem 2rem;
   overflow-x: hidden;
-  transition: 0.5s;
   background-color: white;
   z-index: 1070;
 }
@@ -16083,9 +16099,6 @@ readers do not read off random characters that represent icons */
 }
 .sidebar.open .nav-link i {
   margin-right: 1rem;
-}
-.sidebar.open + .app-main {
-  padding-left: 11rem;
 }
 .sidebar.open > #sidebar-toggle {
   transform: rotate(180deg);
@@ -16106,7 +16119,6 @@ readers do not read off random characters that represent icons */
   top: 5px;
   font-size: 2.5rem;
   color: #6c757d;
-  transition: 0.3s ease-out;
 }
 .sidebar .nav-link {
   color: #007bff;

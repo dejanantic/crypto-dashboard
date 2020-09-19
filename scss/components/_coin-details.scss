@@ -49,4 +49,12 @@
 // Milos review
 .sticky-details + .table-container {
   padding-top: 386px;
+
+  @include media-breakpoint-down(md) {
+    padding-top: 303px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding-top: 443px;
+  }
 }

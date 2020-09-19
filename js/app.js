@@ -45,4 +45,16 @@ $(document).ready(function () {
       localStorage.setItem('sidebarState', 'open');
     }
   });
+
+  function applyTransitions() {
+    const $appMain = $('#app-main');
+    const $sidebar = $('#sidebar');
+    const $sidebarToggle = $('#sidebar-toggle');
+
+    $appMain.addClass('transition-5');
+    $sidebar.addClass('transition-5');
+    $sidebarToggle.addClass('transition-3');
+  }
+
+  $(window).on('load', applyTransitions);
 });

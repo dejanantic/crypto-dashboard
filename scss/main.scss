@@ -1,7 +1,8 @@
-@import "./bootstrap/custom-bootstrap.scss";
+@import "./vendors/custom-bootstrap.scss";
 
 @import "./abstracts/animations";
 @import "./abstracts/variables";
+@import "./abstracts/utilities";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
 @import "../node_modules/@fortawesome/fontawesome-free/scss/regular";

@@ -3,11 +3,9 @@
   top: 0;
   left: 0;
   width: 70px;
-  // width: 11rem;
   height: 100vh;
   padding: 5.5rem 0.5rem 2rem;
   overflow-x: hidden;
-  transition: 0.5s;
   background-color: white;
   z-index: $zindex-tooltip;
 
@@ -25,7 +23,7 @@
     & + .app-main {
       // By disabling this, the .app-main is not going to change width,
       // potentially fixing the sticky width issue, when the sidebar is open.
-      padding-left: 11rem;
+      // padding-left: 11rem;
     }
 
     & > #sidebar-toggle {
@@ -52,7 +50,6 @@
     top: 5px;
     font-size: 2.5rem;
     color: map-get($theme-colors, "secondary");
-    transition: 0.3s ease-out;
   }
 
   .nav-link {
