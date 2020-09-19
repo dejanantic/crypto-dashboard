@@ -1,13 +1,13 @@
 #coin-details {
   position: relative;
   background-color: white;
+  padding-top: 2rem;
 
   &.sticky-details {
     position: fixed;
     top: 0;
     width: calc(100% - 166px);
     z-index: $zindex-modal;
-    padding-top: 2rem;
 
     @include media-breakpoint-down(lg) {
       width: calc(100% - 102px);
@@ -47,14 +47,14 @@
 }
 
 // Milos review
-.sticky-details + .table-container {
-  padding-top: 386px;
+// .sticky-details + .table-container {
+//   padding-top: 386px;
 
-  @include media-breakpoint-down(md) {
-    padding-top: 303px;
-  }
+//   @include media-breakpoint-down(md) {
+//     padding-top: 303px;
+//   }
 
-  @include media-breakpoint-down(sm) {
-    padding-top: 443px;
-  }
-}
+//   @include media-breakpoint-down(sm) {
+//     padding-top: 443px;
+//   }
+// }

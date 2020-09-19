@@ -170,16 +170,6 @@ $(document).ready(function () {
     e.preventDefault();
   });
 
-  // Show coin details
-  function showCoinDetailsSection() {
-    const $coinDetailsSection = $('#coin-details');
-
-    if ($coinDetailsSection.attr('data-status') === 'hidden') {
-      $coinDetailsSection.slideDown();
-      $coinDetailsSection.attr('data-status', 'open');
-    }
-  }
-
   function manipulateSparklineData(sparklineData) {
     const totalHours = sparklineData.length;
     const now = new Date().getTime();
@@ -285,19 +275,46 @@ $(document).ready(function () {
     setTimeout(loaderMethods.remove, 10);
   }
 
+  // Show coin details
+  function showCoinDetailsSection() {
+    const $coinDetailsSection = $('#coin-details');
+    const isCoinDetailsSticky = $coinDetailsSection.hasClass('sticky-details');
+
+    if ($coinDetailsSection.attr('data-status') === 'hidden') {
+      $coinDetailsSection.slideDown();
+      $coinDetailsSection.attr('data-status', 'open');
+    }
+  }
+
+  function hideCoinDetailsSection() {
+    const $coinDetailsSection = $('#coin-details');
+    const isCoinDetailsSticky = $coinDetailsSection.hasClass('sticky-details');
+
+    $coinDetailsSection.attr('data-status', 'hidden');
+    $coinDetailsSection.slideUp();
+    if (isCoinDetailsSticky) $coinDetailsSection.removeClass('sticky-details');
+  }
+
+  $('#close-details-section').on('click', function () {
+    hideCoinDetailsSection();
+  });
+
   // Coin details sticky section
   // Milos review
   $(window).on('scroll', function () {
-    const $coinDetailsSection = $('#coin-details');
-    const isCoinDetailsOpen =
-      $coinDetailsSection.attr('data-status') === 'open';
-    // const sticky = $coinDetailsSection.get(0).offsetTop;
+    const $detailsSection = $('#coin-details');
+    const $tableContainer = $('.table-container');
+    const isCoinDetailsOpen = $detailsSection.attr('data-status') === 'open';
+    const sticky = $('.header').outerHeight();
 
-    // 89 is the height of the header ??? why 72
-    if (window.pageYOffset > 72 && isCoinDetailsOpen) {
-      $coinDetailsSection.addClass('sticky-details');
+    if (window.pageYOffset >= sticky && isCoinDetailsOpen) {
+      $detailsSection.addClass('sticky-details');
+      // Add padding-top to prevent abrupt transition
+      const padding = $detailsSection.outerHeight();
+      $tableContainer.css('padding-top', padding);
     } else {
-      $coinDetailsSection.removeClass('sticky-details');
+      $detailsSection.removeClass('sticky-details');
+      $tableContainer.css('padding-top', 0);
     }
   });
 
@@ -323,19 +340,6 @@ $(document).ready(function () {
         localization: false,
       },
     }).done(displayCoinDetails);
-  });
-
-  function hideCoinDetailsSection() {
-    const $coinDetailsSection = $('#coin-details');
-    const isCoinDetailsSticky = $coinDetailsSection.hasClass('sticky-details');
-
-    $coinDetailsSection.attr('data-status', 'hidden');
-    $coinDetailsSection.slideUp();
-    if (isCoinDetailsSticky) $coinDetailsSection.removeClass('sticky-details');
-  }
-
-  $('#close-details-section').click(function () {
-    hideCoinDetailsSection();
   });
 
   function clearTableBody() {
