@@ -22,26 +22,27 @@ $(document).ready(function () {
 
   // Save sidebar state (open/close) to local storage
   function updateSidebarState() {
+    // If sidebarState is not set, we initialized it to 'closed' (default sidebar state)
     const sidebarState = localStorage.getItem('sidebarState')
       ? localStorage.getItem('sidebarState')
-      : 'open';
-    if (sidebarState === 'open') $('.sidebar').removeClass('collapsed');
-    else $('.sidebar').addClass('collapsed');
+      : 'closed';
+    if (sidebarState === 'open') $('.sidebar').addClass('open');
+    else $('.sidebar').removeClass('open');
   }
 
   // Update sidebarState
   updateSidebarState();
 
   // Toggle sidebar
-  $('.sidebar-toggle').click(function toggleSidebar() {
+  $('.sidebar-toggle').on('click', function toggleSidebar() {
     const $sidebar = $('.sidebar');
 
-    if ($sidebar.hasClass('collapsed')) {
-      $sidebar.removeClass('collapsed');
-      localStorage.setItem('sidebarState', 'open');
-    } else {
-      $sidebar.addClass('collapsed');
+    if ($sidebar.hasClass('open')) {
+      $sidebar.removeClass('open');
       localStorage.setItem('sidebarState', 'closed');
+    } else {
+      $sidebar.addClass('open');
+      localStorage.setItem('sidebarState', 'open');
     }
   });
 });
