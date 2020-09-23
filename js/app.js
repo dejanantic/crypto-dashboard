@@ -17,7 +17,7 @@ const loaderMethods = (function () {
   };
 })();
 
-$(document).ready(function () {
+$(function () {
   loaderMethods.create();
 
   // Save sidebar state (open/close) to local storage
@@ -56,5 +56,5 @@ $(document).ready(function () {
     $sidebarToggle.addClass('transition-3');
   }
 
-  $(window).on('load', applyTransitions);
+  applyTransitions();
 });

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
   function getCoinThumbnail(coin) {
     const $span = $('<span></span>');
     $span.addClass('coin-image mr-2');
@@ -166,10 +166,6 @@ $(document).ready(function () {
 
   fetchCoins();
 
-  $('#account-form').submit(function (e) {
-    e.preventDefault();
-  });
-
   function manipulateSparklineData(sparklineData) {
     const totalHours = sparklineData.length;
     const now = new Date().getTime();
@@ -319,7 +315,7 @@ $(document).ready(function () {
   });
 
   // CRYPTO TABLE FUNCTIONALITY
-  $('#crypto-table').click(function (e) {
+  $('#crypto-table').on('click', function (e) {
     const $parentTr = $(e.target).closest('tr');
     if (!$parentTr.attr('data-coin-id')) return;
 
@@ -348,7 +344,7 @@ $(document).ready(function () {
   }
 
   // Pagination functionality
-  $('#pagination').click(function changeCoinPage(e) {
+  $('#pagination').on('click', function changeCoinPage(e) {
     hideCoinDetailsSection();
 
     const $clickedLi = $(e.target).closest('li');
