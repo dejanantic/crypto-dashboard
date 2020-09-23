@@ -2,6 +2,7 @@
   position: relative;
   background-color: white;
   padding-top: 2rem;
+  // transition: width 0.5s;
 
   &.sticky-details {
     position: fixed;
@@ -44,17 +45,20 @@
       text-align: right;
     }
   }
+
+  #close-details-section {
+    @include media-breakpoint-down(xs) {
+      position: absolute;
+      right: 0;
+      z-index: $zindex-modal;
+    }
+  }
 }
 
-// Milos review
-// .sticky-details + .table-container {
-//   padding-top: 386px;
+.sidebar.open + .app-main #coin-details.sticky-details {
+  width: calc(100% - 17rem);
 
-//   @include media-breakpoint-down(md) {
-//     padding-top: 303px;
-//   }
-
-//   @include media-breakpoint-down(sm) {
-//     padding-top: 443px;
-//   }
-// }
+  @include media-breakpoint-down(lg) {
+    width: calc(100% - 13rem);
+  }
+}

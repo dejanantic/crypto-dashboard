@@ -23,7 +23,7 @@
     & + .app-main {
       // By disabling this, the .app-main is not going to change width,
       // potentially fixing the sticky width issue, when the sidebar is open.
-      // padding-left: 11rem;
+      padding-left: 11rem;
     }
 
     & > #sidebar-toggle {

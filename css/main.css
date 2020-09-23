@@ -16042,6 +16042,22 @@ readers do not read off random characters that represent icons */
     text-align: right;
   }
 }
+@media (max-width: 575.98px) {
+  #coin-details #close-details-section {
+    position: absolute;
+    right: 0;
+    z-index: 1050;
+  }
+}
+
+.sidebar.open + .app-main #coin-details.sticky-details {
+  width: calc(100% - 17rem);
+}
+@media (max-width: 1199.98px) {
+  .sidebar.open + .app-main #coin-details.sticky-details {
+    width: calc(100% - 13rem);
+  }
+}
 
 .app-main {
   padding-left: 4.4rem;
@@ -16085,6 +16101,9 @@ readers do not read off random characters that represent icons */
 }
 .sidebar.open .nav-link i {
   margin-right: 1rem;
+}
+.sidebar.open + .app-main {
+  padding-left: 11rem;
 }
 .sidebar.open > #sidebar-toggle {
   transform: rotate(180deg);
