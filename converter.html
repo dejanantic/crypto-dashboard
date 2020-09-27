@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto Dashboard -- All Your Cryptos In One Place</title>
     <link rel="stylesheet" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="./node_modules/select2/dist/css/select2.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./node_modules/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.min.css"
+    />
   </head>
 
   <body>
@@ -53,7 +61,7 @@
               <h2>Crypto Converter</h2>
             </div>
             <div class="row">
-              <div class="col-12 col-sm-6" id="crypto-1">
+              <div class="col-12 col-sm-6" id="crypto-group-1">
                 <div class="form-group">
                   <input
                     type="number"
@@ -66,7 +74,7 @@
                   <select
                     class="custom-select custom-select-lg"
                     name="crypto1"
-                    id="crypto1"
+                    id="crypto-select-1"
                   >
                     <option selected value="btc">BTC</option>
                     <option value="eth">ETH</option>
@@ -75,7 +83,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-12 col-sm-6" id="crypto-2">
+              <div class="col-12 col-sm-6" id="crypto-group-2">
                 <div class="form-group">
                   <input
                     type="number"
@@ -87,7 +95,7 @@
                   <select
                     class="custom-select custom-select-lg"
                     name="crypto2"
-                    id="crypto2"
+                    id="crypto-select-2"
                   >
                     <option value="btc">BTC</option>
                     <option selected value="eth">ETH</option>
@@ -104,6 +112,7 @@
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./node_modules/select2/dist/js/select2.min.js"></script>
     <script src="./js/converter.js"></script>
   </body>
 </html>
