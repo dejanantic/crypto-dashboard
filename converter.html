@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Dashboard -- All Your Cryptos In One Place</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+
+  <body>
+    <div class="app-container">
+      <aside class="sidebar border-right" id="sidebar">
+        <button class="sidebar-toggle btn" id="sidebar-toggle">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+        <ul class="nav h-100 flex-column">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">
+              <i class="fas fa-chart-bar"></i
+              ><span class="link-text">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="converter.html" class="nav-link active">
+              <i class="fas fa-exchange-alt"></i
+              ><span class="link-text">Converter</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="account.html" class="nav-link">
+              <i class="fas fa-user"></i><span class="link-text">Account</span>
+            </a>
+          </li>
+          <li class="nav-item mt-auto">
+            <a href="#" class="nav-link">
+              <i class="fas fa-sign-out-alt"></i
+              ><span class="link-text">Log out</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <main class="app-main" id="app-main">
+        <header
+          class="header border-bottom justify-content-between bg-white align-items-center d-flex"
+        >
+          <div id="logo" class="logo h1 d-none d-md-block">Crypto Tracker</div>
+          <div id="logo-small" class="logo h3 d-md-none">Crypto Tracker</div>
+        </header>
+        <article class="main-content">
+          <!-- Main content goes here -->
+          <form id="converter">
+            <div class="title">
+              <h2>Crypto Converter</h2>
+            </div>
+            <div class="row">
+              <div class="col-12 col-sm-6" id="crypto-1">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control form-control-lg"
+                    placeholder="Enter amount"
+                    value="1"
+                  />
+                </div>
+                <div class="form-group">
+                  <select
+                    class="custom-select custom-select-lg"
+                    name="crypto1"
+                    id="crypto1"
+                  >
+                    <option selected value="btc">BTC</option>
+                    <option value="eth">ETH</option>
+                    <option value="ltc">LTC</option>
+                    <option value="xrp">XRP</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6" id="crypto-2">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    class="form-control form-control-lg"
+                    value="30.25"
+                  />
+                </div>
+                <div class="form-group">
+                  <select
+                    class="custom-select custom-select-lg"
+                    name="crypto2"
+                    id="crypto2"
+                  >
+                    <option value="btc">BTC</option>
+                    <option selected value="eth">ETH</option>
+                    <option value="ltc">LTC</option>
+                    <option value="xrp">XRP</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </article>
+      </main>
+    </div>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/converter.js"></script>
+  </body>
+</html>

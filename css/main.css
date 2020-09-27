@@ -16141,6 +16141,42 @@ readers do not read off random characters that represent icons */
   color: #fff;
 }
 
+#converter {
+  max-width: 70%;
+  margin: 0 auto;
+}
+@media (max-width: 1199.98px) {
+  #converter {
+    max-width: 80%;
+  }
+}
+@media (max-width: 991.98px) {
+  #converter {
+    max-width: 90%;
+  }
+}
+@media (max-width: 767.98px) {
+  #converter {
+    max-width: 100%;
+  }
+}
+#converter .title {
+  margin: 1.5rem 0 3rem;
+}
+@media (max-width: 575.98px) {
+  #converter .title {
+    margin-bottom: 2rem;
+  }
+  #converter .title h2 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 575.98px) {
+  #converter #crypto-1 {
+    margin-bottom: 1.5rem;
+  }
+}
+
 .coin-details {
   display: none;
 }
