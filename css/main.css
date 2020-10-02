@@ -16177,6 +16177,10 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.huuuge {
+  font-size: 5rem;
+}
+
 .coin-details {
   display: none;
 }
