@@ -1,4 +1,24 @@
-// .account {
-//   .profile-pic {
-//   }
-// }
+.account {
+  .title {
+    margin: $spacer * 1.5 0;
+    display: flex;
+    justify-content: center;
+  }
+  .user-card {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: $spacer * 3;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .user-info {
+      @include media-breakpoint-down(sm) {
+        align-self: flex-end;
+      }
+    }
+
+    .profile-pic {
+      display: block;
+    }
+  }
+}

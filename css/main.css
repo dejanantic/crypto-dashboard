@@ -16141,6 +16141,27 @@ readers do not read off random characters that represent icons */
   color: #fff;
 }
 
+.account .title {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 767.98px) {
+  .account .user-card {
+    margin-bottom: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 767.98px) {
+  .account .user-card .user-info {
+    align-self: flex-end;
+  }
+}
+.account .user-card .profile-pic {
+  display: block;
+}
+
 #converter {
   max-width: 70%;
   margin: 0 auto;
@@ -16182,6 +16203,11 @@ readers do not read off random characters that represent icons */
 }
 #converter .switch-container #switch {
   margin: 0 auto;
+}
+@media (max-width: 575.98px) {
+  #converter .switch-container #switch {
+    width: 100%;
+  }
 }
 
 .coin-details {

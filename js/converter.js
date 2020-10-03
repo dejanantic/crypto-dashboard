@@ -55,7 +55,7 @@ $(function () {
       .done(function () {
         $('#crypto-select-1').select2({
           theme: 'bootstrap4',
-          placeholder: 'BTC',
+          width: '100%',
           data: [...getCoinData()],
           templateSelection(coin) {
             $(coin.element).attr('data-current-price', coin.current_price);
@@ -65,7 +65,7 @@ $(function () {
 
         $('#crypto-select-2').select2({
           theme: 'bootstrap4',
-          placeholder: 'ETH',
+          width: '100%',
           data: [...getCoinData()],
           templateSelection(coin) {
             $(coin.element).attr('data-current-price', coin.current_price);

@@ -48,22 +48,27 @@
         </header>
         <article class="main-content">
           <div class="account d-flex flex-column justify-content-center">
-            <div class="row mb-3 d-flex justify-content-center">
+            <div class="row justify-content-center">
+              <div class="title col-12">
+                <h2>Account settings</h2>
+              </div>
               <div class="col-12 col-md-3">
-                <img
-                  src="./images/profile.jpg"
-                  class="img-thumbnail profile-pic rounded-circle"
-                  alt="Profile picture"
-                />
-                <div class="user-info d-inline-block align-self-center">
-                  <p class="h2">Dejan Antic</p>
-                  <small class="text-muted">Oslo, Norway</small>
+                <div class="user-card">
+                  <img
+                    src="./images/profile.jpg"
+                    class="img-thumbnail profile-pic rounded-circle"
+                    alt="Profile picture"
+                  />
+                  <div class="user-info">
+                    <p class="h2">Dejan Antic</p>
+                    <small class="text-muted">Oslo, Norway</small>
+                  </div>
                 </div>
               </div>
               <div class="col-12 col-md-6">
-                <form id="account-form" class="w-75">
+                <form id="account-form">
                   <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                       <label for="inputFirstName">First name</label>
                       <input
                         type="text"
@@ -71,7 +76,7 @@
                         id="inputFirstName"
                       />
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                       <label for="inputLastName">Last name</label>
                       <input
                         type="text"
@@ -85,7 +90,7 @@
                     <input type="email" class="form-control" id="inputEmail" />
                   </div>
                   <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                       <label for="inputPassword">Password</label>
                       <input
                         type="password"
@@ -93,7 +98,7 @@
                         id="inputPassword"
                       />
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                       <label for="inputPassword2">Repeat password</label>
                       <input
                         type="password"
@@ -102,13 +107,19 @@
                       />
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity" />
-                  </div>
-                  <div class="form-group">
-                    <label for="inputCountry">Country</label>
-                    <input type="text" class="form-control" id="inputCountry" />
+                  <div class="form-row">
+                    <div class="form-group col-sm-6">
+                      <label for="inputCity">City</label>
+                      <input type="text" class="form-control" id="inputCity" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                      <label for="inputCountry">Country</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputCountry"
+                      />
+                    </div>
                   </div>
                   <button type="submit" class="btn btn-primary">
                     Save changes
@@ -121,6 +132,8 @@
       </main>
     </div>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/account.js"></script>
   </body>
 </html>

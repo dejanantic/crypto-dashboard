@@ -35,6 +35,9 @@
 
     #switch {
       margin: 0 auto;
+      @include media-breakpoint-down(xs) {
+        width: 100%;
+      }
     }
   }
 }
