@@ -1,6 +1,4 @@
 $(function () {
-  // loaderMethods.remove();
-
   let coinData = [];
 
   function getCoinData() {
@@ -79,4 +77,23 @@ $(function () {
   }
 
   fetchCoins();
+
+  // Switch cyrptocurrencies
+  $('#switch').on('click', function (e) {
+    e.preventDefault();
+
+    const select1 = $('#crypto-select-1');
+    const value1 = select1.val();
+    const select2 = $('#crypto-select-2');
+    const value2 = select2.val();
+
+    select1.val(value2);
+    select2.val(value1);
+
+    select1.trigger('change');
+    select2.trigger('change');
+
+    // Dispatch the input event to refresh the numbers
+    select2.trigger('input');
+  });
 });

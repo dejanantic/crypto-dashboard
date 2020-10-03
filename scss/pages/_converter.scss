@@ -26,13 +26,15 @@
     }
   }
 
-  #crypto-group-1 {
+  .switch-container {
+    display: flex;
+    align-items: center;
     @include media-breakpoint-down(xs) {
-      margin-bottom: $spacer * 1.5;
+      margin: ($spacer * 0.3) 0 ($spacer * 1.5);
+    }
+
+    #switch {
+      margin: 0 auto;
     }
   }
-}
-
-.huuuge {
-  font-size: 5rem;
 }

@@ -16171,14 +16171,17 @@ readers do not read off random characters that represent icons */
     font-size: 1.5rem;
   }
 }
+#converter .switch-container {
+  display: flex;
+  align-items: center;
+}
 @media (max-width: 575.98px) {
-  #converter #crypto-group-1 {
-    margin-bottom: 1.5rem;
+  #converter .switch-container {
+    margin: 0.3rem 0 1.5rem;
   }
 }
-
-.huuuge {
-  font-size: 5rem;
+#converter .switch-container #switch {
+  margin: 0 auto;
 }
 
 .coin-details {
