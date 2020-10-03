@@ -66,7 +66,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-6">
-                <form id="account-form">
+                <form id="account-form" class="needs-validation" novalidate>
                   <div class="form-row">
                     <div class="form-group col-sm-6">
                       <label for="inputFirstName">First name</label>
@@ -74,7 +74,12 @@
                         type="text"
                         class="form-control"
                         id="inputFirstName"
+                        required
                       />
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">
+                        Please provide your name.
+                      </div>
                     </div>
                     <div class="form-group col-sm-6">
                       <label for="inputLastName">Last name</label>
@@ -82,12 +87,26 @@
                         type="text"
                         class="form-control"
                         id="inputLastName"
+                        required
                       />
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">
+                        Please provide your last name.
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" />
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="inputEmail"
+                      required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">
+                      Please provide a valid email.
+                    </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-sm-6">
@@ -96,7 +115,13 @@
                         type="password"
                         class="form-control"
                         id="inputPassword"
+                        minlength="6"
+                        required
                       />
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">
+                        Passwords must match (min 6 chars).
+                      </div>
                     </div>
                     <div class="form-group col-sm-6">
                       <label for="inputPassword2">Repeat password</label>
@@ -104,13 +129,26 @@
                         type="password"
                         class="form-control"
                         id="inputPassword2"
+                        minlength="6"
+                        required
                       />
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">
+                        Passwords must match (min 6 chars).
+                      </div>
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-sm-6">
                       <label for="inputCity">City</label>
-                      <input type="text" class="form-control" id="inputCity" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputCity"
+                        required
+                      />
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">Please provide a city.</div>
                     </div>
                     <div class="form-group col-sm-6">
                       <label for="inputCountry">Country</label>
@@ -118,7 +156,12 @@
                         type="text"
                         class="form-control"
                         id="inputCountry"
+                        required
                       />
+                      <div class="valid-feedback">Looks good!</div>
+                      <div class="invalid-feedback">
+                        Please provide a country.
+                      </div>
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">
