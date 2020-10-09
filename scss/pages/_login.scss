@@ -1,0 +1,36 @@
+#main {
+  height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+
+  #logo {
+    margin-bottom: $spacer * 3;
+  }
+
+  .login-form {
+    width: 19rem;
+    @include media-breakpoint-down(xs) {
+      width: auto;
+
+      #form-meta {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+
+        & > :first-child {
+          margin-bottom: $spacer * 0.25;
+        }
+      }
+    }
+
+    #form {
+      margin-bottom: $spacer;
+
+      .form-title {
+        margin-bottom: $spacer * 1.5;
+      }
+    }
+  }
+}

@@ -16229,4 +16229,37 @@ readers do not read off random characters that represent icons */
   width: 220px;
 }
 
+#main {
+  height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+#main #logo {
+  margin-bottom: 3rem;
+}
+#main .login-form {
+  width: 19rem;
+}
+@media (max-width: 575.98px) {
+  #main .login-form {
+    width: auto;
+  }
+  #main .login-form #form-meta {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  #main .login-form #form-meta > :first-child {
+    margin-bottom: 0.25rem;
+  }
+}
+#main .login-form #form {
+  margin-bottom: 1rem;
+}
+#main .login-form #form .form-title {
+  margin-bottom: 1.5rem;
+}
+
 /*# sourceMappingURL=main.css.map */
