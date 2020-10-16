@@ -2,7 +2,7 @@
 
 A nifty little dashboard to give you a quick overview of most popular cryptocurrencies (market cap).
 
-### Technologies used
+### Technologies Used
 
 > HTML, CSS3 and JS (ES6)
 
