@@ -1,25 +1,39 @@
 # Crypto Dashboard -- Quick Overview of Your Favorite Cryptos
 
-A nifty little dashboard to give you a quick glance over your crypto portfolio.
+A nifty little dashboard to give you a quick overview of most popular cryptocurrencies (market cap).
 
-Custom design, cool graphs and much more.
-
-#HODL #FOMO #DYOR #FUD
-
-### Technologies Used
+### Technologies used
 
 > HTML, CSS3 and JS (ES6)
 
-> Bootstrap 4 (customized)
+> Bootstrap 4
 
 > jQuery
 
 > SASS
 
-> Chart.js
+> Linting with ESLint
 
-> CoinGecko API
+### Features
 
-### App Demo
+> Customized Bootstrap
 
-Deployed with GitHub Pges - link goes here
+> Font Awesome icons
+
+> Coin data from CoinGecko API
+
+> Interactive charts with ApexCharts.js library
+
+> Custom off-canvas menu
+
+> Sticky functionality for coin details section
+
+> Cryptocurrency converter
+
+> Advanced select boxes with Select2 jQuery plugin
+
+> Form validation with jQuery Validation Plugin
+
+### Live Demo
+
+[https://dejanantic.github.io/crypto-dashboard/](https://dejanantic.github.io/crypto-dashboard/)
